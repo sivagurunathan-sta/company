@@ -13,6 +13,7 @@ const {
 const auth = require('../middleware/auth');
 const { body, validationResult } = require('express-validator');
 
+const express = require('express');
 const router = express.Router();
 
 // Validation middleware for contact form
@@ -33,8 +34,14 @@ const validateContactForm = [
   body('phone')
     .optional()
     .trim()
-    .matches(/^[\+]?[1-9][\d]{0,15}$/)
-    .withMessage('Please provide a valid phone number'),
+    .custom((value) => {
+      if (!value) return true;
+      const cleaned = String(value).replace(/[^\d+]/g, '');
+      if (!/^\+?\d{7,15}$/.test(cleaned)) {
+        throw new Error('Please provide a valid phone number');
+      }
+      return true;
+    }),
   
   body('subject')
     .trim()
