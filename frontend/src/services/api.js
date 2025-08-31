@@ -400,7 +400,8 @@ export const teamAPI = {
             formData.append(`${key}[]`, item);
           });
         } else {
-          formData.append(key, data[key]);
+          const value = typeof data[key] === 'boolean' ? String(data[key]) : data[key];
+          formData.append(key, value);
         }
       }
     });
@@ -435,7 +436,8 @@ export const teamAPI = {
             formData.append(`${key}[]`, item);
           });
         } else {
-          formData.append(key, data[key]);
+          const value = typeof data[key] === 'boolean' ? String(data[key]) : data[key];
+          formData.append(key, value);
         }
       }
     });
@@ -455,7 +457,7 @@ export const teamAPI = {
 export const contactAPI = {
   submit: (data) => api.post('/contact', data),
   getAll: (params = {}) => api.get('/contact', { params }),
-  updateStatus: (id, status) => api.put(`/contact/${id}`, { status }),
+  updateStatus: (id, status) => api.put(`/contact/${id}/status`, { status }),
 };
 
 // Enhanced image URL handling

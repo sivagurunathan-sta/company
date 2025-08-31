@@ -107,6 +107,10 @@ const teamSchema = new mongoose.Schema({
       message: 'Join date cannot be in the future'
     }
   },
+  isLeader: {
+    type: Boolean,
+    default: false
+  },
   isActive: {
     type: Boolean,
     default: true
@@ -117,6 +121,7 @@ const teamSchema = new mongoose.Schema({
 
 // Indexes for better query performance
 teamSchema.index({ isActive: 1, department: 1 });
+teamSchema.index({ isLeader: 1, isActive: 1 });
 teamSchema.index({ isActive: 1, joinDate: -1 });
 teamSchema.index({ name: 'text', position: 'text', bio: 'text' });
 teamSchema.index({ skills: 1 });

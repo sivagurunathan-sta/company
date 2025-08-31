@@ -10,13 +10,16 @@ import {
   FiGlobe,
   FiClock
 } from 'react-icons/fi';
-import { contentAPI } from '../../services/api';
+import { contentAPI, teamAPI, getAssetUrl } from '../../services/api';
 import LoadingSpinner from '../common/LoadingSpinner';
 
 const About = () => {
   const { data: aboutContent, isLoading } = useQuery('aboutContent', () =>
     contentAPI.getBySection('about')
   );
+
+  // Load team to power editable leadership cards
+  const { data: teamData } = useQuery('teamMembers', () => teamAPI.getAll(), { staleTime: 5 * 60 * 1000 });
 
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -291,60 +294,67 @@ const About = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {/* Leadership cards with professional images */}
-            {[
-              { 
-                name: "Sivakumar R", 
-                role: "CEO & Founder", 
-                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300&q=80",
-                description: "Visionary leader with 10+ years in tech innovation"
-              },
-              { 
-                name: "Priya Sharma", 
-                role: "CTO", 
-                image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?fit=crop&w=300&h=300&q=80",
-                description: "Technology expert driving our development strategy"
-              },
-              { 
-                name: "Arjun Patel", 
-                role: "Head of Projects", 
-                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fit=crop&w=300&h=300&q=80",
-                description: "Project management excellence and client satisfaction"
+            {/* Leadership cards powered by Team collection (department: 'Leadership') with fallback */}
+            {(() => {
+              const team = teamData?.data?.team || [];
+              let leadership = team.filter(m => m.isLeader);
+              if (leadership.length === 0) {
+                leadership = team
+                  .filter(m => (m.department && m.department.toLowerCase() === 'leadership') || /ceo|cto|head/i.test(m.position || ''))
+                  .slice(0, 3);
+              } else {
+                leadership = leadership.slice(0, 3);
               }
-            ].map((leader, index) => (
-              <motion.div
-                key={leader.name}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-              >
-                <img
-                  src={leader.image}
-                  alt={leader.name}
-                  className="w-full h-64 object-cover"
-                  onError={(e) => {
-                    e.target.src = `https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300&q=80`;
-                  }}
-                />
-                <div className="p-6 text-center">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{leader.name}</h3>
-                  <p className="text-blue-600 font-medium mb-2">{leader.role}</p>
-                  <p className="text-gray-600 text-sm">{leader.description}</p>
-                </div>
-              </motion.div>
-            ))}
+              const cards = leadership.length > 0 ? leadership.map(m => ({
+                name: m.name,
+                role: m.position,
+                image: m.image?.url ? getAssetUrl(m.image.url) : '',
+                description: m.bio || ''
+              })) : [
+                { name: 'Sivakumar R', role: 'CEO & Founder', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300&q=80', description: 'Visionary leader with 10+ years in tech innovation' },
+                { name: 'Priya Sharma', role: 'CTO', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?fit=crop&w=300&h=300&q=80', description: 'Technology expert driving our development strategy' },
+                { name: 'Arjun Patel', role: 'Head of Projects', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fit=crop&w=300&h=300&q=80', description: 'Project management excellence and client satisfaction' }
+              ];
+              return cards.map((leader, index) => (
+                <motion.div
+                  key={`${leader.name}-${index}`}
+                  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                >
+                  <img
+                    src={leader.image}
+                    alt={leader.name}
+                    className="w-full h-64 object-cover"
+                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300&q=80'; }}
+                  />
+                  <div className="p-6 text-center">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{leader.name}</h3>
+                    <p className="text-blue-600 font-medium mb-2">{leader.role}</p>
+                    {leader.description && (
+                      <p className="text-gray-600 text-sm">{leader.description}</p>
+                    )}
+                  </div>
+                </motion.div>
+              ));
+            })()}
           </div>
 
-          <div className="text-center">
+          <div className="text-center space-y-3">
             <a
               href="/family"
               className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
             >
               Meet the Full Team
             </a>
+            {/* Admin-only quick edit button (visible if auth token present) */}
+            {/* eslint-disable-next-line */}
+            {(() => { try { return localStorage.getItem('token') ? (
+              <a href="/admin/dashboard?tab=team" className="block text-sm text-blue-600 hover:text-blue-700">Edit these cards in ZEYA Panel</a>
+            ) : null; } catch { return null; } })()}
           </div>
         </div>
       </section>

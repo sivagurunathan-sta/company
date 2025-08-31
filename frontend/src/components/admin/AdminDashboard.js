@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import {
@@ -13,6 +13,7 @@ import {
   FiTool,
   FiUser
 } from 'react-icons/fi';
+import { useLocation } from 'react-router-dom';
 import ContentEditor from './ContentEditor';
 import ProjectEditor from './ProjectEditor';
 import TeamEditor from './TeamEditor';
@@ -25,6 +26,27 @@ import AdminProfile from './AdminProfile';
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('services');
   const { admin, logout } = useAuth();
+  const location = useLocation();
+
+  // Allow deep-linking with ?tab=team etc.
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get('tab');
+    if (tab) setActiveTab(tab);
+  }, [location.search]);
+
+  // Force light theme on admin pages
+  useEffect(() => {
+    const hadDark = document.documentElement.classList.contains('dark');
+    document.documentElement.classList.remove('dark');
+    document.body.classList.remove('dark');
+    return () => {
+      if (hadDark) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+      }
+    };
+  }, []);
 
   const sidebarItems = [
     { id: 'overview', name: 'Overview', icon: FiBarChart },
@@ -71,7 +93,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <div className="flex">
         {/* Sidebar */}
         <div className="w-64 bg-white shadow-lg min-h-screen">

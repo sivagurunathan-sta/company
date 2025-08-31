@@ -112,7 +112,7 @@ const AdminProfile = () => {
                     name="username"
                     value={formData.username}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Enter username"
                     required
                   />
@@ -131,7 +131,7 @@ const AdminProfile = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Enter email address"
                     required
                   />
@@ -167,7 +167,7 @@ const AdminProfile = () => {
 
               {isChangingPassword && (
                 <motion.div
-                  className="space-y-4 p-4 bg-gray-50 rounded-lg"
+                  className="space-y-4 p-4 bg-white rounded-lg border border-gray-200"
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
@@ -185,7 +185,7 @@ const AdminProfile = () => {
                         name="currentPassword"
                         value={formData.currentPassword}
                         onChange={handleChange}
-                        className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full pl-10 pr-12 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Enter current password"
                         required={isChangingPassword}
                       />
@@ -211,7 +211,7 @@ const AdminProfile = () => {
                         name="newPassword"
                         value={formData.newPassword}
                         onChange={handleChange}
-                        className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full pl-10 pr-12 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Enter new password"
                         required={isChangingPassword}
                         minLength="6"
@@ -238,7 +238,7 @@ const AdminProfile = () => {
                         name="confirmPassword"
                         value={formData.confirmPassword}
                         onChange={handleChange}
-                        className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full pl-10 pr-12 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Confirm new password"
                         required={isChangingPassword}
                         minLength="6"
@@ -281,7 +281,7 @@ const AdminProfile = () => {
 
         {/* Current Credentials Display */}
         <motion.div
-          className="bg-blue-50 rounded-lg p-6 mt-6"
+          className="bg-white rounded-lg p-6 mt-6 border border-gray-200"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}

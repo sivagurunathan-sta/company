@@ -128,7 +128,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Enhanced Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white py-20 overflow-hidden">
         {/* Animated Background */}
@@ -180,23 +180,23 @@ const Contact = () => {
                 {info.href ? (
                   <a
                     href={info.href}
-                    className="block bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
+                    className="block bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700"
                   >
                     <div className={`inline-flex p-4 rounded-xl ${info.color} text-white mb-4 group-hover:scale-110 transition-transform`}>
                       <info.icon className="w-6 h-6" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{info.title}</h3>
-                    <p className="text-lg font-semibold text-gray-700 mb-1">{info.content}</p>
-                    <p className="text-gray-500 text-sm">{info.description}</p>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">{info.title}</h3>
+                    <p className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-1">{info.content}</p>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">{info.description}</p>
                   </a>
                 ) : (
-                  <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                  <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700">
                     <div className={`inline-flex p-4 rounded-xl ${info.color} text-white mb-4 group-hover:scale-110 transition-transform`}>
                       <info.icon className="w-6 h-6" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{info.title}</h3>
-                    <p className="text-lg font-semibold text-gray-700 mb-1">{info.content}</p>
-                    <p className="text-gray-500 text-sm">{info.description}</p>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">{info.title}</h3>
+                    <p className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-1">{info.content}</p>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">{info.description}</p>
                   </div>
                 )}
               </motion.div>
@@ -214,11 +214,11 @@ const Contact = () => {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white rounded-3xl shadow-2xl p-8 lg:p-12"
+              className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 lg:p-12"
             >
               <div className="mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Send Us a Message</h2>
-                <p className="text-gray-600">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Send Us a Message</h2>
+                <p className="text-gray-600 dark:text-gray-300">
                   Fill out the form below and we'll get back to you as soon as possible.
                 </p>
               </div>
@@ -226,7 +226,7 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name Field */}
                 <div className="group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Full Name *
                   </label>
                   <div className="relative">
@@ -236,7 +236,7 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                      className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
                       placeholder="Your full name"
                       required
                     />
@@ -246,7 +246,7 @@ const Contact = () => {
                 {/* Email and Phone Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="group">
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                       Email Address *
                     </label>
                     <div className="relative">
@@ -256,7 +256,7 @@ const Contact = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                        className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
                         placeholder="your@email.com"
                         required
                       />
@@ -264,7 +264,7 @@ const Contact = () => {
                   </div>
 
                   <div className="group">
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                       Phone Number
                     </label>
                     <div className="relative">
@@ -274,7 +274,7 @@ const Contact = () => {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                        className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
                         placeholder="+91 9876543210"
                       />
                     </div>
@@ -284,14 +284,14 @@ const Contact = () => {
                 {/* Query Type and Priority */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                       Query Type
                     </label>
                     <select
                       name="queryType"
                       value={formData.queryType}
                       onChange={handleChange}
-                      className="w-full px-4 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                      className="w-full px-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
                     >
                       <option value="general">General Inquiry</option>
                       <option value="project">New Project</option>
@@ -302,14 +302,14 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                       Priority Level
                     </label>
                     <select
                       name="urgency"
                       value={formData.urgency}
                       onChange={handleChange}
-                      className="w-full px-4 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                      className="w-full px-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
                     >
                       <option value="low">Low - General inquiry</option>
                       <option value="medium">Medium - Standard response</option>
@@ -321,7 +321,7 @@ const Contact = () => {
 
                 {/* Subject */}
                 <div className="group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Subject *
                   </label>
                   <div className="relative">
@@ -331,7 +331,7 @@ const Contact = () => {
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                      className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
                       placeholder="Brief subject of your message"
                       required
                     />
@@ -340,7 +340,7 @@ const Contact = () => {
 
                 {/* Message */}
                 <div className="group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Message *
                   </label>
                   <div className="relative">
@@ -350,7 +350,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows="6"
-                      className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all duration-300 bg-gray-50 hover:bg-white"
+                      className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
                       placeholder="Tell us about your project or inquiry..."
                       required
                     />
@@ -390,8 +390,8 @@ const Contact = () => {
               className="space-y-8"
             >
               {/* FAQ Section */}
-              <div className="bg-white rounded-3xl shadow-xl p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+              <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-8">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
                   <FiAlertCircle className="mr-3 text-blue-500" />
                   Frequently Asked Questions
                 </h3>
@@ -404,10 +404,10 @@ const Contact = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
-                      className="border-b border-gray-100 pb-4 last:border-b-0"
+                      className="border-b border-gray-100 dark:border-gray-700 pb-4 last:border-b-0"
                     >
-                      <h4 className="font-semibold text-gray-900 mb-2">{faq.question}</h4>
-                      <p className="text-gray-600 text-sm leading-relaxed">{faq.answer}</p>
+                      <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">{faq.question}</h4>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{faq.answer}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -468,36 +468,36 @@ const Contact = () => {
               </div>
 
               {/* Location Map Info */}
-              <div className="bg-white rounded-3xl shadow-xl p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+              <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-8">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
                   <FiMapPin className="mr-3 text-purple-500" />
                   Our Location
                 </h3>
                 
                 <div className="space-y-4">
-                  <div className="p-4 bg-purple-50 rounded-xl">
-                    <h4 className="font-semibold text-gray-900 mb-2">ZEYA-TECH Office</h4>
-                    <p className="text-gray-600 text-sm mb-2">
+                  <div className="p-4 bg-purple-50 dark:bg-purple-900/30 rounded-xl">
+                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">ZEYA-TECH Office</h4>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">
                       Northern Bank of Coovum River<br />
                       Egmore, Chennai 600008<br />
                       Tamil Nadu, India
                     </p>
-                    <div className="flex items-center text-purple-600 text-sm">
+                    <div className="flex items-center text-purple-600 dark:text-purple-300 text-sm">
                       <FiMapPin className="w-4 h-4 mr-1" />
                       <span>Conveniently located in Chennai's business district</span>
                     </div>
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-3 bg-blue-50 rounded-lg">
-                      <FiClock className="w-5 h-5 text-blue-600 mx-auto mb-1" />
-                      <div className="text-sm font-medium text-gray-900">Mon-Fri</div>
-                      <div className="text-xs text-gray-600">8AM-6PM</div>
+                    <div className="text-center p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+                      <FiClock className="w-5 h-5 text-blue-600 dark:text-blue-300 mx-auto mb-1" />
+                      <div className="text-sm font-medium text-gray-900 dark:text-gray-100">Mon-Fri</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-300">8AM-6PM</div>
                     </div>
-                    <div className="text-center p-3 bg-green-50 rounded-lg">
-                      <FiPhone className="w-5 h-5 text-green-600 mx-auto mb-1" />
-                      <div className="text-sm font-medium text-gray-900">Call Us</div>
-                      <div className="text-xs text-gray-600">Quick Response</div>
+                    <div className="text-center p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+                      <FiPhone className="w-5 h-5 text-green-600 dark:text-green-300 mx-auto mb-1" />
+                      <div className="text-sm font-medium text-gray-900 dark:text-gray-100">Call Us</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-300">Quick Response</div>
                     </div>
                   </div>
                 </div>
@@ -508,7 +508,7 @@ const Contact = () => {
       </section>
 
       {/* Bottom CTA Section */}
-      <section className="py-16 bg-gray-900 text-white">
+      <section className="py-16 bg-gray-900 dark:bg-gray-800 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

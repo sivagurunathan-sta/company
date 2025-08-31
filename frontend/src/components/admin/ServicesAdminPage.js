@@ -379,7 +379,7 @@ const ServicesAdminPage = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading services...</p>
@@ -389,7 +389,7 @@ const ServicesAdminPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-white p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
@@ -610,7 +610,7 @@ const ServicesAdminPage = () => {
                           type="text"
                           value={formData.title}
                           onChange={(e) => setFormData(prev => ({...prev, title: e.target.value}))}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                           required
                           placeholder="Enter service title"
                         />
@@ -624,7 +624,7 @@ const ServicesAdminPage = () => {
                           type="text"
                           value={formData.price}
                           onChange={(e) => setFormData(prev => ({...prev, price: e.target.value}))}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                           required
                           placeholder="e.g., Starting at $2,999"
                         />
@@ -639,7 +639,7 @@ const ServicesAdminPage = () => {
                       <textarea
                         value={formData.description}
                         onChange={(e) => setFormData(prev => ({...prev, description: e.target.value}))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         rows={4}
                         required
                         placeholder="Describe your service..."
@@ -655,7 +655,7 @@ const ServicesAdminPage = () => {
                         <select
                           value={formData.category}
                           onChange={(e) => setFormData(prev => ({...prev, category: e.target.value}))}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         >
                           {categoryOptions.map(cat => (
                             <option key={cat} value={cat}>
@@ -672,7 +672,7 @@ const ServicesAdminPage = () => {
                         <select
                           value={formData.icon}
                           onChange={(e) => setFormData(prev => ({...prev, icon: e.target.value}))}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         >
                           {iconOptions.map(icon => (
                             <option key={icon.value} value={icon.value}>
@@ -690,7 +690,7 @@ const ServicesAdminPage = () => {
                           type="text"
                           value={formData.duration}
                           onChange={(e) => setFormData(prev => ({...prev, duration: e.target.value}))}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                           placeholder="e.g., 4-8 weeks"
                         />
                       </div>
@@ -707,7 +707,7 @@ const ServicesAdminPage = () => {
                             type="text"
                             value={feature}
                             onChange={(e) => handleArrayFieldChange(index, e.target.value, 'features')}
-                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="flex-1 px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="Enter feature"
                           />
                           {formData.features.length > 1 && (
@@ -742,7 +742,7 @@ const ServicesAdminPage = () => {
                             type="text"
                             value={tag}
                             onChange={(e) => handleArrayFieldChange(index, e.target.value, 'tags')}
-                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="flex-1 px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="Enter tag"
                           />
                           {formData.tags.length > 1 && (

@@ -52,12 +52,12 @@ const validateContactForm = [
   
   body('queryType')
     .optional()
-    .isIn(['general', 'project', 'career', 'partnership'])
+    .isIn(['general', 'project', 'support', 'career', 'partnership'])
     .withMessage('Invalid query type'),
   
   body('urgency')
     .optional()
-    .isIn(['low', 'medium', 'high'])
+    .isIn(['low', 'medium', 'high', 'critical'])
     .withMessage('Invalid urgency level'),
   
   // Custom validation middleware
