@@ -99,34 +99,7 @@ const Services = () => {
             <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
               Comprehensive technology solutions to transform your business and drive innovation
             </p>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <button className="px-8 py-4 bg-white text-blue-900 font-semibold rounded-lg hover:bg-blue-50 transition-colors duration-300 flex items-center justify-center">
-                Get Started Today
-                <FiArrowRight className="ml-2" />
-              </button>
-              <button className="px-8 py-4 border-2 border-blue-300 text-blue-100 font-semibold rounded-lg hover:bg-blue-800 transition-colors duration-300">
-                View Portfolio
-              </button>
-            </motion.div>
-            
-            {/* Debug info for development */}
-            {process.env.NODE_ENV === 'development' && (
-              <div className="mt-4 text-sm opacity-75">
-                <p>Services loaded: {allServices.length} | Source: {allServices.length > 0 ? 'Backend' : 'Default'}</p>
-                <button
-                  onClick={() => refetch()}
-                  className="mt-2 px-4 py-2 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-colors flex items-center gap-2 mx-auto"
-                >
-                  <FiRefreshCw size={16} />
-                  Refresh Services
-                </button>
-              </div>
-            )}
+            {/* Hero primary actions removed per request */}
           </motion.div>
         </div>
       </section>
