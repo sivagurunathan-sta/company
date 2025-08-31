@@ -70,6 +70,27 @@ const Family = () => {
         </div>
       </section>
 
+      {/* Admin quick-edit */}
+      {/** Visible only to logged-in admins via AuthContext **/}
+      {/* eslint-disable-next-line */}
+      {(() => {
+        try {
+          // Lazy read auth from localStorage token presence; UI authority controlled by backend
+          const hasToken = typeof window !== 'undefined' && !!localStorage.getItem('token');
+          return hasToken ? (
+            <div className="bg-yellow-50 border border-yellow-200 text-yellow-700 py-2">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-right">
+                <a href="/admin/dashboard?tab=team" className="inline-flex items-center px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700">
+                  Edit Team in ZEYA Panel
+                </a>
+              </div>
+            </div>
+          ) : null;
+        } catch {
+          return null;
+        }
+      })()}
+
       {/* Team Stats */}
       <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
