@@ -324,8 +324,8 @@ const createTeamMember = async (req, res) => {
       email: req.body.email?.trim().toLowerCase() || '',
       phone: req.body.phone?.trim() || '',
       bio: req.body.bio?.trim() || '',
-      isActive: req.body.isActive !== undefined ? req.body.isActive === 'true' || req.body.isActive === true : true,
-      isLeader: req.body.isLeader !== undefined ? req.body.isLeader === 'true' || req.body.isLeader === true : false,
+      isActive: req.body.isActive !== undefined ? toBool(req.body.isActive) : true,
+      isLeader: req.body.isLeader !== undefined ? toBool(req.body.isLeader) : false,
       joinDate: req.body.joinDate ? new Date(req.body.joinDate) : new Date()
     };
 
@@ -402,6 +402,9 @@ const createTeamMember = async (req, res) => {
   }
 };
 
+// Robust boolean parser to handle various truthy forms coming from multipart/form-data
+const toBool = (v) => v === true || v === 'true' || v === '1' || v === 'on' || v === 'yes';
+
 const updateTeamMember = async (req, res) => {
   try {
     const { id } = req.params;
@@ -445,10 +448,10 @@ const updateTeamMember = async (req, res) => {
     if (req.body.bio !== undefined) updateData.bio = req.body.bio.trim();
     if (req.body.joinDate !== undefined) updateData.joinDate = new Date(req.body.joinDate);
     if (req.body.isActive !== undefined) {
-      updateData.isActive = req.body.isActive === 'true' || req.body.isActive === true;
+      updateData.isActive = toBool(req.body.isActive);
     }
     if (req.body.isLeader !== undefined) {
-      updateData.isLeader = req.body.isLeader === 'true' || req.body.isLeader === true;
+      updateData.isLeader = toBool(req.body.isLeader);
     }
 
     // Handle image upload
