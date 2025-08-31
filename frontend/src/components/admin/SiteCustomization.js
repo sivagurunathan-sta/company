@@ -251,7 +251,7 @@ const BrandingTab = ({ customization, updateNestedField, onImageUpload }) => (
               type="number"
               value={customization.logo.width || 120}
               onChange={(e) => updateNestedField('logo', 'width', parseInt(e.target.value))}
-              className="w-24 px-3 py-2 border border-gray-300 rounded-md"
+              className="w-24 px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           <div>
@@ -260,7 +260,7 @@ const BrandingTab = ({ customization, updateNestedField, onImageUpload }) => (
               type="number"
               value={customization.logo.height || 40}
               onChange={(e) => updateNestedField('logo', 'height', parseInt(e.target.value))}
-              className="w-24 px-3 py-2 border border-gray-300 rounded-md"
+              className="w-24 px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
         </div>
@@ -415,7 +415,7 @@ const ColorsTab = ({ customization, updateNestedField }) => (
               type="text"
               value={customization?.colors?.[color.key] || '#3b82f6'}
               onChange={(e) => updateNestedField('colors', color.key, e.target.value)}
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm font-mono"
+              className="flex-1 px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-mono"
               placeholder="#3b82f6"
             />
           </div>
@@ -482,7 +482,7 @@ const BackgroundTab = ({ customization, updateNestedField, onImageUpload }) => (
           <select
             value={customization.backgroundImage.position || 'center'}
             onChange={(e) => updateNestedField('backgroundImage', 'position', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="center">Center</option>
             <option value="top">Top</option>
@@ -501,7 +501,7 @@ const BackgroundTab = ({ customization, updateNestedField, onImageUpload }) => (
           <select
             value={customization.backgroundImage.size || 'cover'}
             onChange={(e) => updateNestedField('backgroundImage', 'size', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="cover">Cover</option>
             <option value="contain">Contain</option>
@@ -515,7 +515,7 @@ const BackgroundTab = ({ customization, updateNestedField, onImageUpload }) => (
           <select
             value={customization.backgroundImage.repeat || 'no-repeat'}
             onChange={(e) => updateNestedField('backgroundImage', 'repeat', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="no-repeat">No Repeat</option>
             <option value="repeat">Repeat</option>
@@ -543,7 +543,7 @@ const GeneralTab = ({ customization, updateNestedField }) => (
           type="text"
           value={customization?.seo?.title || ''}
           onChange={(e) => updateNestedField('seo', 'title', e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Your Company Name"
         />
       </div>
@@ -553,7 +553,7 @@ const GeneralTab = ({ customization, updateNestedField }) => (
         <textarea
           value={customization?.seo?.description || ''}
           onChange={(e) => updateNestedField('seo', 'description', e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           rows="3"
           placeholder="Brief description of your company..."
         />
@@ -565,7 +565,7 @@ const GeneralTab = ({ customization, updateNestedField }) => (
           type="text"
           value={customization?.seo?.keywords || ''}
           onChange={(e) => updateNestedField('seo', 'keywords', e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           placeholder="keyword1, keyword2, keyword3"
         />
       </div>
@@ -589,7 +589,7 @@ const GeneralTab = ({ customization, updateNestedField }) => (
             type="url"
             value={customization?.socialMedia?.[social.key] || ''}
             onChange={(e) => updateNestedField('socialMedia', social.key, e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder={`https://${social.key}.com/yourcompany`}
           />
         </div>
@@ -606,7 +606,7 @@ const GeneralTab = ({ customization, updateNestedField }) => (
           type="tel"
           value={customization?.contact?.phone || ''}
           onChange={(e) => updateNestedField('contact', 'phone', e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           placeholder="+1 (555) 123-4567"
         />
       </div>
@@ -617,7 +617,7 @@ const GeneralTab = ({ customization, updateNestedField }) => (
           type="email"
           value={customization?.contact?.email || ''}
           onChange={(e) => updateNestedField('contact', 'email', e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           placeholder="contact@yourcompany.com"
         />
       </div>
@@ -627,7 +627,7 @@ const GeneralTab = ({ customization, updateNestedField }) => (
         <textarea
           value={customization?.contact?.address || ''}
           onChange={(e) => updateNestedField('contact', 'address', e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           rows="3"
           placeholder="123 Business St, City, State 12345"
         />
