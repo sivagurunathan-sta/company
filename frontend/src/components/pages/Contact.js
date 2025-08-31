@@ -238,7 +238,7 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       minLength={2}
-                      className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
+                      className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white dark:bg-white hover:bg-white dark:hover:bg-white text-gray-900 placeholder-gray-600"
                       placeholder="Your full name"
                       required
                     />
@@ -258,7 +258,7 @@ const Contact = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
+                        className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white dark:bg-white hover:bg-white dark:hover:bg-white text-gray-900 placeholder-gray-600"
                         placeholder="your@email.com"
                         required
                       />
@@ -277,7 +277,7 @@ const Contact = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       pattern="[+0-9\-\s()]{7,}"
-                        className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
+                        className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white dark:bg-white hover:bg-white dark:hover:bg-white text-gray-900 placeholder-gray-600"
                         placeholder="+91 9876543210"
                       />
                     </div>
@@ -294,7 +294,7 @@ const Contact = () => {
                       name="queryType"
                       value={formData.queryType}
                       onChange={handleChange}
-                      className="w-full px-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
+                      className="w-full px-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white dark:bg-white hover:bg-white dark:hover:bg-white text-gray-900 placeholder-gray-600"
                     >
                       <option value="general">General Inquiry</option>
                       <option value="project">New Project</option>
@@ -312,7 +312,7 @@ const Contact = () => {
                       name="urgency"
                       value={formData.urgency}
                       onChange={handleChange}
-                      className="w-full px-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
+                      className="w-full px-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white dark:bg-white hover:bg-white dark:hover:bg-white text-gray-900 placeholder-gray-600"
                     >
                       <option value="low">Low - General inquiry</option>
                       <option value="medium">Medium - Standard response</option>
@@ -335,7 +335,7 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       maxLength={200}
-                      className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
+                      className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white dark:bg-white hover:bg-white dark:hover:bg-white text-gray-900 placeholder-gray-600"
                       placeholder="Brief subject of your message"
                       required
                     />
@@ -355,7 +355,7 @@ const Contact = () => {
                       onChange={handleChange}
                       minLength={10}
                       rows="6"
-                      className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
+                      className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all duration-300 bg-white dark:bg-white hover:bg-white dark:hover:bg-white text-gray-900 placeholder-gray-600"
                       placeholder="Tell us about your project or inquiry..."
                       required
                     />
