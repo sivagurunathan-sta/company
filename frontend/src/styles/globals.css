@@ -400,14 +400,43 @@ select:focus-visible {
   }
 }
 
+/* Smooth theme transition utilities */
+html {
+  transition: color-scheme 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Dark mode utilities */
 .dark {
   color-scheme: dark;
 }
 
+/* Smooth transitions for common elements */
+button,
+[role="button"],
+input,
+textarea,
+select,
+.card,
+.glass-card,
+header,
+nav,
+aside,
+main,
+section,
+article,
+div {
+  transition:
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .dark body {
   background-color: #0f172a;
   color: #f1f5f9;
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark ::-webkit-scrollbar-track {
