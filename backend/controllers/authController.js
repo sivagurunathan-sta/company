@@ -236,11 +236,21 @@ const updateMe = async (req, res) => {
       email,
       hasCurrentPassword: !!currentPassword,
       hasNewPassword: !!newPassword,
-      adminId: req.admin.id
+      adminId: req.admin?.id,
+      requestBody: { ...req.body, currentPassword: '[HIDDEN]', newPassword: '[HIDDEN]' }
     });
+
+    if (!req.admin || !req.admin.id) {
+      console.log('❌ No admin ID in request');
+      return res.status(401).json({
+        success: false,
+        message: 'Authentication required'
+      });
+    }
 
     // Find admin and include password field
     const admin = await Admin.findById(req.admin.id).select('+password');
+    console.log('👤 Found admin:', { id: admin?._id, username: admin?.username, email: admin?.email });
 
     if (!admin) {
       return res.status(404).json({
