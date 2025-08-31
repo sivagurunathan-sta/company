@@ -71,9 +71,9 @@ const Header = () => {
     <>
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200' 
-            : 'bg-white shadow-lg'
+          isScrolled
+            ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-200 dark:border-gray-700'
+            : 'bg-white dark:bg-gray-900 shadow-lg'
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -90,8 +90,8 @@ const Header = () => {
               >
                 {/* ZEYA-TECH Logo */}
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
-                  <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                    <span className="text-blue-600 font-bold text-lg">Z</span>
+                  <div className="w-8 h-8 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-center">
+                    <span className="text-blue-600 dark:text-blue-400 font-bold text-lg">Z</span>
                   </div>
                 </div>
                 
@@ -103,7 +103,7 @@ const Header = () => {
                 <span className="font-bold text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   ZEYA-TECH
                 </span>
-                <div className="text-xs text-gray-600 -mt-1">
+                <div className="text-xs text-gray-600 dark:text-gray-400 -mt-1">
                   Building the Future
                 </div>
               </div>
@@ -117,14 +117,14 @@ const Header = () => {
                   to={item.path}
                   className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 group ${
                     isActive(item.path)
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
                 >
                   <span className="relative z-10">{item.name}</span>
                   {isActive(item.path) && (
                     <motion.div
-                      className="absolute inset-0 bg-blue-50 rounded-lg border border-blue-200"
+                      className="absolute inset-0 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700"
                       layoutId="activeTab"
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
@@ -139,7 +139,7 @@ const Header = () => {
               {/* Search with Dropdown */}
               <div className="relative search-container">
                 <motion.button
-                  className="p-2.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 relative group flex items-center"
+                  className="p-2.5 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 relative group flex items-center"
                   onClick={() => setIsSearchOpen(!isSearchOpen)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -157,9 +157,9 @@ const Header = () => {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -10, scale: 0.95 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50"
+                      className="absolute top-full right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 py-2 z-50"
                     >
-                      <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-100">
+                      <div className="px-3 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-100 dark:border-gray-700">
                         Navigate to:
                       </div>
                       {navItems.map((item, index) => (
@@ -171,8 +171,8 @@ const Header = () => {
                         >
                           <Link
                             to={item.path}
-                            className={`block px-4 py-2.5 text-sm hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 ${
-                              isActive(item.path) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'
+                            className={`block px-4 py-2.5 text-sm hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 ${
+                              isActive(item.path) ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30' : 'text-gray-700 dark:text-gray-300'
                             }`}
                             onClick={() => setIsSearchOpen(false)}
                           >
@@ -187,7 +187,7 @@ const Header = () => {
 
               {/* Theme Toggle Button */}
               <motion.button
-                className="p-2.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 relative group"
+                className="p-2.5 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 relative group"
                 onClick={toggleTheme}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -219,7 +219,7 @@ const Header = () => {
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </motion.button>
 
-              <div className="w-px h-6 bg-gray-300"></div>
+              <div className="w-px h-6 bg-gray-300 dark:bg-gray-600"></div>
 
               <motion.div
                 whileHover={{ scale: 1.02 }}
@@ -238,7 +238,7 @@ const Header = () => {
 
             {/* Enhanced Mobile menu button */}
             <motion.button
-              className="lg:hidden p-2.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 mobile-menu-container"
+              className="lg:hidden p-2.5 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 mobile-menu-container"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -278,7 +278,7 @@ const Header = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 mobile-menu-container"
+              className="lg:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 mobile-menu-container"
             >
               <div className="max-w-7xl mx-auto px-4 py-4">
                 <motion.div 
@@ -298,8 +298,8 @@ const Header = () => {
                         to={item.path}
                         className={`block px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${
                           isActive(item.path)
-                            ? 'text-blue-600 bg-blue-50 border border-blue-200'
-                            : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                            ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700'
+                            : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                         }`}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
@@ -309,14 +309,14 @@ const Header = () => {
                   ))}
                   
                   <motion.div 
-                    className="pt-4 border-t border-gray-200"
+                    className="pt-4 border-t border-gray-200 dark:border-gray-700"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
                   >
                     <div className="flex items-center space-x-3 mb-4">
                       <button
-                        className="flex-1 p-3 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 flex items-center justify-center"
+                        className="flex-1 p-3 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 flex items-center justify-center"
                         onClick={() => {
                           setIsSearchOpen(!isSearchOpen);
                           setIsMobileMenuOpen(false);
@@ -326,7 +326,7 @@ const Header = () => {
                         Quick Navigation
                       </button>
                       <button
-                        className="flex-1 p-3 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 flex items-center justify-center"
+                        className="flex-1 p-3 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 flex items-center justify-center"
                         onClick={toggleTheme}
                       >
                         {isDarkTheme ? <FiSun className="w-5 h-5 mr-2" /> : <FiMoon className="w-5 h-5 mr-2" />}
