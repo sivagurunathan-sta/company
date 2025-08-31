@@ -56,12 +56,12 @@ const AdminLogin = () => {
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-2 text-white mb-6">
             <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-              <span className="text-blue-600 font-bold text-sm">LC</span>
+              <span className="text-blue-600 font-bold text-sm">Z</span>
             </div>
             <span className="font-bold text-xl">ZEYA-TECH</span>
           </Link>
-          <h1 className="text-3xl font-bold text-white mb-2">Admin Login</h1>
-          <p className="text-blue-200">Access your dashboard to manage content</p>
+          <h1 className="text-3xl font-bold text-white mb-2">Zeya-Login</h1>
+          <p className="text-blue-200">Access Your Paid Project</p>
         </div>
 
         {/* Login Form */}
@@ -85,7 +85,7 @@ const AdminLogin = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
-                  placeholder="admin@example.com"
+                  placeholder="Enter your email"
                   required
                 />
               </div>
@@ -127,12 +127,6 @@ const AdminLogin = () => {
             </button>
           </form>
 
-          {/* Demo Credentials */}
-          <div className="mt-6 p-4 bg-blue-800/30 rounded-lg border border-blue-400/30">
-            <p className="text-sm text-blue-200 mb-2">Demo Credentials:</p>
-            <p className="text-xs text-blue-300">Email: admin@example.com</p>
-            <p className="text-xs text-blue-300">Password: admin123</p>
-          </div>
         </motion.div>
 
         {/* Back to Home */}

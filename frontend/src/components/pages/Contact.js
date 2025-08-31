@@ -87,10 +87,10 @@ const Contact = () => {
     {
       icon: FiPhone,
       title: 'Call Us',
-      content: '+91 7598814577',
+      content: '+91 9150587418',
       description: 'Mon-Fri from 8am to 6pm.',
       color: 'bg-green-500',
-      href: 'tel:+917598814577'
+      href: 'tel:+919150587418'
     },
     {
       icon: FiMapPin,
@@ -523,7 +523,7 @@ const Contact = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:+917598814577"
+                href="tel:+919150587418"
                 className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <FiPhone className="mr-2" />

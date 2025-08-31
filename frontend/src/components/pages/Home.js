@@ -14,41 +14,21 @@ import {
   FiHeart,
   FiShield
 } from 'react-icons/fi';
-import { useQuery } from 'react-query';
-import { contentAPI, achievementAPI, projectAPI } from '../../services/api';
 import { useCustomization } from '../../context/CustomizationContext';
 
 const Home = () => {
   const { getColor } = useCustomization();
   const [natureImages, setNatureImages] = useState([]);
 
-  // Fetch nature images from Unsplash API
+  // Load nature images (using fallback images to avoid API errors)
   useEffect(() => {
-    const fetchNatureImages = async () => {
-      try {
-        const response = await fetch(
-          'https://api.unsplash.com/photos/random?query=nature,landscape,forest,mountains&count=4&orientation=landscape',
-          {
-            headers: {
-              'Authorization': 'Client-ID YOUR_UNSPLASH_ACCESS_KEY'
-            }
-          }
-        );
-        const data = await response.json();
-        setNatureImages(data.map(img => img.urls.regular));
-      } catch (error) {
-        console.error('Error fetching nature images:', error);
-        // Fallback to default nature images
-        setNatureImages([
-          'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?fit=crop&w=300&h=300&q=80',
-          'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?fit=crop&w=300&h=300&q=80',
-          'https://images.unsplash.com/photo-1518837695005-2083093ee35b?fit=crop&w=300&h=300&q=80',
-          'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?fit=crop&w=300&h=300&q=80'
-        ]);
-      }
-    };
-
-    fetchNatureImages();
+    // Use high-quality nature images from Unsplash (direct URLs, no API calls)
+    setNatureImages([
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop&crop=center&q=80',
+      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=300&h=300&fit=crop&crop=center&q=80',
+      'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=300&h=300&fit=crop&crop=center&q=80',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=300&h=300&fit=crop&crop=center&q=80'
+    ]);
   }, []);
 
   const fadeInUp = {

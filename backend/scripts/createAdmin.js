@@ -37,7 +37,7 @@ const createAdmin = async () => {
       });
 
       console.log('💡 You can login with any of the above credentials.');
-      console.log('💡 Default password is usually: admin123');
+      console.log('💡 Default password is usually: zeya7techworld@?');
       console.log('');
       console.log('🔄 If you want to create a new admin or reset password, delete existing admins first.');
       
@@ -48,9 +48,9 @@ const createAdmin = async () => {
     console.log('📝 Creating new admin user...');
     
     const adminData = {
-      username: 'admin',
-      email: 'admin@example.com',
-      password: 'admin123',
+      username: 'zeya',
+      email: 'zeya@gmail.com',
+      password: 'zeya7techworld@?',
       role: 'admin'
     };
 
@@ -61,15 +61,15 @@ const createAdmin = async () => {
     console.log('📋 LOGIN CREDENTIALS:');
     console.log(`   Username: ${admin.username}`);
     console.log(`   Email: ${admin.email}`);
-    console.log('   Password: admin123');
+    console.log('   Password: zeya7techworld@?');
     console.log(`   Role: ${admin.role}`);
     console.log('='.repeat(50));
-    console.log('⚠️  IMPORTANT: Please change these credentials after first login!');
+    console.log('⚠️  IMPORTANT: Keep these credentials secure!');
     console.log('🌐 You can now login at: http://localhost:5001/admin/login');
-    
+
     // Test password hashing
     console.log('🔐 Testing password verification...');
-    const isPasswordValid = await admin.comparePassword('admin123');
+    const isPasswordValid = await admin.comparePassword('zeya7techworld@?');
     console.log('🔐 Password test result:', isPasswordValid ? '✅ PASSED' : '❌ FAILED');
     
     if (!isPasswordValid) {

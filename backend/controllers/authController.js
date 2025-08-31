@@ -227,9 +227,139 @@ const debugAdmins = async (req, res) => {
   }
 };
 
+const updateMe = async (req, res) => {
+  try {
+    const { username, email, currentPassword, newPassword } = req.body;
+
+    console.log('🔄 Profile update attempt:', {
+      username,
+      email,
+      hasCurrentPassword: !!currentPassword,
+      hasNewPassword: !!newPassword,
+      adminId: req.admin?.id,
+      requestBody: { ...req.body, currentPassword: '[HIDDEN]', newPassword: '[HIDDEN]' }
+    });
+
+    if (!req.admin || !req.admin.id) {
+      console.log('❌ No admin ID in request');
+      return res.status(401).json({
+        success: false,
+        message: 'Authentication required'
+      });
+    }
+
+    // Find admin and include password field
+    const admin = await Admin.findById(req.admin.id).select('+password');
+    console.log('👤 Found admin:', { id: admin?._id, username: admin?.username, email: admin?.email });
+
+    if (!admin) {
+      return res.status(404).json({
+        success: false,
+        message: 'Admin not found'
+      });
+    }
+
+    // If updating password, verify current password
+    if (newPassword) {
+      if (!currentPassword) {
+        return res.status(400).json({
+          success: false,
+          message: 'Current password is required to change password'
+        });
+      }
+
+      const isCurrentPasswordValid = await admin.comparePassword(currentPassword);
+      if (!isCurrentPasswordValid) {
+        return res.status(401).json({
+          success: false,
+          message: 'Current password is incorrect'
+        });
+      }
+
+      // Validate new password
+      if (newPassword.length < 6) {
+        return res.status(400).json({
+          success: false,
+          message: 'New password must be at least 6 characters long'
+        });
+      }
+
+      admin.password = newPassword; // Pre-save hook will hash it
+    }
+
+    // Update username if provided
+    if (username && username !== admin.username) {
+      // Check if username is already taken by another admin
+      const existingAdmin = await Admin.findOne({
+        username,
+        _id: { $ne: req.admin.id }
+      });
+
+      if (existingAdmin) {
+        return res.status(400).json({
+          success: false,
+          message: 'Username is already taken'
+        });
+      }
+
+      admin.username = username;
+    }
+
+    // Update email if provided
+    if (email && email !== admin.email) {
+      // Check if email is already taken by another admin
+      const existingAdmin = await Admin.findOne({
+        email: email.toLowerCase(),
+        _id: { $ne: req.admin.id }
+      });
+
+      if (existingAdmin) {
+        return res.status(400).json({
+          success: false,
+          message: 'Email is already taken'
+        });
+      }
+
+      admin.email = email.toLowerCase();
+    }
+
+    await admin.save();
+
+    console.log('✅ Profile updated successfully:', {
+      username: admin.username,
+      email: admin.email
+    });
+
+    res.json({
+      success: true,
+      admin: {
+        id: admin._id,
+        username: admin.username,
+        email: admin.email,
+        role: admin.role
+      }
+    });
+  } catch (error) {
+    console.error('❌ Profile update error:', error);
+
+    if (error.name === 'MongoNetworkError' || error.name === 'MongooseError') {
+      return res.status(503).json({
+        success: false,
+        message: 'Database connection error. Please try again later.'
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Profile update failed'
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
   getMe,
+  updateMe,
   debugAdmins
 };

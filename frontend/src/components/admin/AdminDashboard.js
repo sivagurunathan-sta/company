@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
-import { 
-  FiAward, 
-  FiFolderPlus, 
-  FiUsers, 
-  FiMail, 
+import {
+  FiAward,
+  FiFolderPlus,
+  FiUsers,
+  FiMail,
   FiSettings,
   FiLogOut,
   FiEdit3,
   FiBarChart,
-  FiTool
+  FiTool,
+  FiUser
 } from 'react-icons/fi';
 import ContentEditor from './ContentEditor';
 import ProjectEditor from './ProjectEditor';
@@ -19,6 +20,7 @@ import SiteCustomization from './SiteCustomization';
 import ServicesAdminPage from './ServicesAdminPage';
 import AchievementsAdminPage from './AchievementsAdminPage';
 import ImageTroubleshooter from '../debug/ImageTroubleshooter';
+import AdminProfile from './AdminProfile';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('services');
@@ -32,6 +34,7 @@ const AdminDashboard = () => {
     { id: 'projects', name: 'Projects', icon: FiFolderPlus },
     { id: 'team', name: 'Team', icon: FiUsers },
     { id: 'messages', name: 'Messages', icon: FiMail },
+    { id: 'profile', name: 'Profile', icon: FiUser },
     { id: 'customization', name: 'Site Design', icon: FiSettings },
     { id: 'debug', name: 'Image Debug', icon: FiTool },
   ];
@@ -56,6 +59,8 @@ const AdminDashboard = () => {
         return <TeamEditor />;
       case 'messages':
         return <MessagesPlaceholder />;
+      case 'profile':
+        return <AdminProfile />;
       case 'customization':
         return <SiteCustomization />;
       case 'debug':
@@ -74,9 +79,9 @@ const AdminDashboard = () => {
           <div className="p-6 border-b">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">LC</span>
+                <span className="text-white font-bold text-sm">Z</span>
               </div>
-              <span className="font-bold text-lg">Admin Panel</span>
+              <span className="font-bold text-lg">Zeya Panel</span>
             </div>
             <div className="mt-2">
               <p className="text-sm text-gray-600">Welcome, {admin?.username}</p>

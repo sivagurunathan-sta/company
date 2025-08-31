@@ -29,6 +29,25 @@ const authReducer = (state, action) => {
         token: null,
         error: action.payload
       };
+    case 'UPDATE_START':
+      return {
+        ...state,
+        loading: true,
+        error: null
+      };
+    case 'UPDATE_SUCCESS':
+      return {
+        ...state,
+        loading: false,
+        admin: action.payload.admin,
+        error: null
+      };
+    case 'UPDATE_FAILURE':
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
     case 'LOGOUT':
       return {
         ...state,
@@ -117,6 +136,40 @@ export const AuthProvider = ({ children }) => {
     dispatch({ type: 'LOGOUT' });
   };
 
+  const updateProfile = async (profileData) => {
+    try {
+      console.log('🔄 Updating profile with data:', {
+        ...profileData,
+        currentPassword: profileData.currentPassword ? '[HIDDEN]' : undefined,
+        newPassword: profileData.newPassword ? '[HIDDEN]' : undefined
+      });
+
+      dispatch({ type: 'UPDATE_START' });
+
+      const response = await api.put('/auth/me', profileData);
+      console.log('✅ Profile update response:', response.data);
+
+      const { admin } = response.data;
+
+      dispatch({
+        type: 'UPDATE_SUCCESS',
+        payload: { admin }
+      });
+
+      return { success: true };
+    } catch (error) {
+      console.error('❌ Profile update error:', error);
+      console.error('❌ Error response:', error.response?.data);
+
+      const errorMessage = error.response?.data?.message || 'Profile update failed';
+      dispatch({
+        type: 'UPDATE_FAILURE',
+        payload: errorMessage
+      });
+      return { success: false, error: errorMessage };
+    }
+  };
+
   const clearError = () => {
     dispatch({ type: 'CLEAR_ERROR' });
   };
@@ -125,6 +178,7 @@ export const AuthProvider = ({ children }) => {
     ...state,
     login,
     logout,
+    updateProfile,
     clearError
   };
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login, getMe, debugAdmins } = require('../controllers/authController');
+const { register, login, getMe, updateMe, debugAdmins } = require('../controllers/authController');
 const auth = require('../middleware/auth');
 
 const router = express.Router();
@@ -9,8 +9,8 @@ router.get('/debug/admins', debugAdmins);
 
 // Test route to check if auth routes are working
 router.get('/test', (req, res) => {
-  res.json({ 
-    success: true, 
+  res.json({
+    success: true,
     message: 'Auth routes are working',
     timestamp: new Date().toISOString()
   });
@@ -20,5 +20,6 @@ router.get('/test', (req, res) => {
 router.post('/register', register);
 router.post('/login', login);
 router.get('/me', auth, getMe);
+router.put('/me', auth, updateMe);
 
 module.exports = router;
