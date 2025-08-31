@@ -13,6 +13,7 @@ import {
 } from 'react-icons/fi';
 import { projectAPI, getAssetUrl } from '../../services/api';
 import LoadingSpinner from '../common/LoadingSpinner';
+import Modal from '../ui/Modal';
 
 const UpcomingProjects = () => {
   const [selectedStatus, setSelectedStatus] = useState('all');
@@ -209,6 +210,8 @@ const UpcomingProjects = () => {
 
 // Project Card Component
 const ProjectCard = ({ project, index, viewMode, getStatusColor, getStatusIcon }) => {
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const ERROR_IMAGE_URL = 'https://cdn.builder.io/api/v1/image/assets%2Fc22d82f454134145a990d239b199841f%2F501a7b87fe1d4b8e9203ee19b6307667?format=webp&width=800';
   return (
     <motion.div
       className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 ${
@@ -387,11 +390,18 @@ const ProjectCard = ({ project, index, viewMode, getStatusColor, getStatusIcon }
 
         {/* Action Button - Only in grid view */}
         {viewMode === 'grid' && (
-          <div className="mt-4">
-            <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm font-medium">
-              View Details
-            </button>
-          </div>
+          <>
+            <div className="mt-4">
+              <button onClick={() => setShowErrorModal(true)} className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm font-medium">
+                View Details
+              </button>
+            </div>
+            <Modal isOpen={showErrorModal} onClose={() => setShowErrorModal(false)} title="404 Error" size="lg">
+              <div className="flex flex-col items-center">
+                <img src={ERROR_IMAGE_URL} alt="404 Error" className="w-full h-auto rounded-lg" />
+              </div>
+            </Modal>
+          </>
         )}
 
         {/* Timeline Indicator - Only in list view */}
