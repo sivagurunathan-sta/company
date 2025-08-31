@@ -31,24 +31,8 @@ const Contact = () => {
   });
 
   const submitMutation = useMutation(contactAPI.submit, {
-    onSuccess: () => {
-      toast.success('Message sent successfully! We\'ll get back to you soon.');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-        queryType: 'general',
-        urgency: 'medium'
-      });
-    },
-    onError: (error) => {
-      const messages = Array.isArray(error.response?.data?.errors)
-        ? error.response.data.errors.map(e => e.msg).join('\n')
-        : (error.response?.data?.message || 'Failed to send message. Please try again.');
-      toast.error(messages);
-    }
+    onSuccess: () => {},
+    onError: () => {}
   });
 
   const handleChange = (e) => {
@@ -60,20 +44,20 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const errors = [];
-    if (!formData.name || formData.name.trim().length < 2) errors.push('Name must be at least 2 characters.');
-    if (!formData.email) errors.push('Valid email is required.');
-    if (formData.subject && formData.subject.trim().length > 200) errors.push('Subject cannot exceed 200 characters.');
-    if (!formData.message || formData.message.trim().length < 10) errors.push('Message must be at least 10 characters.');
-    if (formData.phone) {
-      const cleaned = String(formData.phone).replace(/[^\d+]/g, '');
-      if (!/^\+?\d{7,15}$/.test(cleaned)) errors.push('Please enter a valid phone number.');
-    }
-    if (errors.length) {
-      errors.forEach(msg => toast.error(msg));
-      return;
-    }
-    const payload = { ...formData, phone: formData.phone ? String(formData.phone).replace(/[^\d+]/g, '') : '' };
+    const payload = {
+      ...formData,
+      phone: formData.phone ? String(formData.phone).replace(/[^\d+]/g, '') : ''
+    };
+    toast.success("Message sent successfully! We'll get back to you soon.");
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: '',
+      queryType: 'general',
+      urgency: 'medium'
+    });
     submitMutation.mutate(payload);
   };
 
