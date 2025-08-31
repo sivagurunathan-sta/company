@@ -310,7 +310,7 @@ const TypographyTab = ({ customization, updateNestedField }) => {
           <select
             value={customization?.fonts?.primary || 'Inter'}
             onChange={(e) => updateNestedField('fonts', 'primary', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             {fonts.map(font => (
               <option key={font} value={font} style={{ fontFamily: font }}>
@@ -325,7 +325,7 @@ const TypographyTab = ({ customization, updateNestedField }) => {
           <select
             value={customization?.fonts?.secondary || 'Inter'}
             onChange={(e) => updateNestedField('fonts', 'secondary', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             {fonts.map(font => (
               <option key={font} value={font} style={{ fontFamily: font }}>
@@ -340,7 +340,7 @@ const TypographyTab = ({ customization, updateNestedField }) => {
           <select
             value={customization?.fonts?.headingWeight || '600'}
             onChange={(e) => updateNestedField('fonts', 'headingWeight', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             {weights.map(weight => (
               <option key={weight.value} value={weight.value}>
@@ -355,7 +355,7 @@ const TypographyTab = ({ customization, updateNestedField }) => {
           <select
             value={customization?.fonts?.bodyWeight || '400'}
             onChange={(e) => updateNestedField('fonts', 'bodyWeight', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             {weights.filter(w => parseInt(w.value) <= 700).map(weight => (
               <option key={weight.value} value={weight.value}>
