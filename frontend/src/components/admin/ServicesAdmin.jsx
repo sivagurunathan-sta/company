@@ -374,7 +374,7 @@ const ServicesAdmin = () => {
                         type="text"
                         value={formData.title}
                         onChange={(e) => setFormData(prev => ({...prev, title: e.target.value}))}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         required
                       />
                     </div>
@@ -385,7 +385,7 @@ const ServicesAdmin = () => {
                         type="text"
                         value={formData.price}
                         onChange={(e) => setFormData(prev => ({...prev, price: e.target.value}))}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="e.g., Starting at $2,999"
                         required
                       />
@@ -397,7 +397,7 @@ const ServicesAdmin = () => {
                     <textarea
                       value={formData.description}
                       onChange={(e) => setFormData(prev => ({...prev, description: e.target.value}))}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       rows={3}
                       required
                     />
@@ -410,7 +410,7 @@ const ServicesAdmin = () => {
                       accept="image/*"
                       multiple
                       onChange={(e) => setImages(Array.from(e.target.files))}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     />
                     {images.length > 0 && (
                       <p className="text-xs text-gray-500 mt-1">{images.length} file(s) selected</p>
@@ -423,7 +423,7 @@ const ServicesAdmin = () => {
                       <select
                         value={formData.category}
                         onChange={(e) => setFormData(prev => ({...prev, category: e.target.value}))}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       >
                         {categoryOptions.map(cat => (
                           <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
@@ -436,7 +436,7 @@ const ServicesAdmin = () => {
                       <select
                         value={formData.icon}
                         onChange={(e) => setFormData(prev => ({...prev, icon: e.target.value}))}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       >
                         {iconOptions.map(icon => (
                           <option key={icon} value={icon}>{icon.replace('Fi', '')}</option>
@@ -450,7 +450,7 @@ const ServicesAdmin = () => {
                         type="text"
                         value={formData.duration}
                         onChange={(e) => setFormData(prev => ({...prev, duration: e.target.value}))}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="e.g., 4-8 weeks"
                       />
                     </div>
@@ -465,7 +465,7 @@ const ServicesAdmin = () => {
                           type="text"
                           value={feature}
                           onChange={(e) => handleArrayChange(index, e.target.value, 'features')}
-                          className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="flex-1 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                           placeholder="Enter feature"
                         />
                         {formData.features.length > 1 && (
@@ -497,7 +497,7 @@ const ServicesAdmin = () => {
                           type="text"
                           value={tag}
                           onChange={(e) => handleArrayChange(index, e.target.value, 'tags')}
-                          className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="flex-1 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                           placeholder="Enter tag"
                         />
                         {formData.tags.length > 1 && (
@@ -525,7 +525,7 @@ const ServicesAdmin = () => {
                     <select
                       value={formData.gradient}
                       onChange={(e) => setFormData(prev => ({...prev, gradient: e.target.value}))}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       {gradientOptions.map(gradient => (
                         <option key={gradient} value={gradient}>
