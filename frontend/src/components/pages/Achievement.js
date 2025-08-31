@@ -7,6 +7,7 @@ import { achievementAPI } from '../../services/api';
 import LoadingSpinner from '../common/LoadingSpinner';
 import EnhancedImage from '../common/EnhancedImage';
 import { getAssetUrl } from '../../services/api';
+import Modal from '../ui/Modal';
 
 const Achievement = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -238,6 +239,8 @@ const Achievement = () => {
 
 // Enhanced Achievement Card Component
 const AchievementCard = ({ achievement, index, getCategoryIcon, getCategoryColor, debugMode }) => {
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const ERROR_IMAGE_URL = 'https://cdn.builder.io/api/v1/image/assets%2Fc22d82f454134145a990d239b199841f%2F501a7b87fe1d4b8e9203ee19b6307667?format=webp&width=800';
   return (
     <motion.div
       className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
@@ -322,9 +325,14 @@ const AchievementCard = ({ achievement, index, getCategoryIcon, getCategoryColor
           </div>
         ) : (
           <div className="mt-4">
-            <button className="w-full bg-gray-100 text-gray-600 py-2 px-4 rounded-lg text-sm font-medium">
+            <button onClick={() => setShowErrorModal(true)} className="w-full bg-gray-100 text-gray-600 py-2 px-4 rounded-lg text-sm font-medium">
               View Details
             </button>
+            <Modal isOpen={showErrorModal} onClose={() => setShowErrorModal(false)} title="404 Error" size="lg">
+              <div className="flex flex-col items-center">
+                <img src={ERROR_IMAGE_URL} alt="404 Error" className="w-full h-auto rounded-lg" />
+              </div>
+            </Modal>
           </div>
         )}
       </div>
