@@ -43,6 +43,7 @@ const Header = () => {
 
     setIsDarkTheme(shouldUseDark);
     document.documentElement.classList.toggle('dark', shouldUseDark);
+    document.body.classList.toggle('dark', shouldUseDark);
   }, []);
 
   // Theme toggle handler
