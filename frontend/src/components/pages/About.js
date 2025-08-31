@@ -338,13 +338,18 @@ const About = () => {
             ))}
           </div>
 
-          <div className="text-center">
+          <div className="text-center space-y-3">
             <a
               href="/family"
               className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
             >
               Meet the Full Team
             </a>
+            {/* Admin-only quick edit button (visible if auth token present) */}
+            {/* eslint-disable-next-line */}
+            {(() => { try { return localStorage.getItem('token') ? (
+              <a href="/admin/dashboard?tab=team" className="block text-sm text-blue-600 hover:text-blue-700">Edit these cards in ZEYA Panel</a>
+            ) : null; } catch { return null; } })()}
           </div>
         </div>
       </section>
