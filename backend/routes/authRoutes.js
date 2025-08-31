@@ -20,10 +20,27 @@ router.get('/test', (req, res) => {
   });
 });
 
+// Test PUT route to verify PUT method works
+router.put('/test-put', (req, res) => {
+  console.log('✅ PUT /test-put route hit');
+  res.json({
+    success: true,
+    message: 'PUT route is working',
+    timestamp: new Date().toISOString(),
+    body: req.body
+  });
+});
+
 // Authentication routes
 router.post('/register', register);
 router.post('/login', login);
 router.get('/me', auth, getMe);
-router.put('/me', auth, updateMe);
+router.put('/me', (req, res, next) => {
+  console.log('🔄 PUT /me route hit - about to call auth middleware');
+  next();
+}, auth, (req, res, next) => {
+  console.log('🔄 PUT /me auth passed - about to call updateMe controller');
+  next();
+}, updateMe);
 
 module.exports = router;
