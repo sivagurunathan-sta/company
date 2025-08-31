@@ -274,15 +274,6 @@ const Services = () => {
               Contact us today to discuss your project requirements and get a custom quote
               tailored to your needs.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-white text-blue-900 font-semibold rounded-lg hover:bg-blue-50 transition-colors duration-300 flex items-center justify-center">
-                Start Your Project
-                <FiArrowRight className="ml-2" />
-              </button>
-              <button className="px-8 py-4 border-2 border-blue-300 text-blue-100 font-semibold rounded-lg hover:bg-blue-800 transition-colors duration-300">
-                Schedule Consultation
-              </button>
-            </div>
           </motion.div>
         </div>
       </section>
