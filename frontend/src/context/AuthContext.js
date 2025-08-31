@@ -119,9 +119,17 @@ export const AuthProvider = ({ children }) => {
 
   const updateProfile = async (profileData) => {
     try {
+      console.log('🔄 Updating profile with data:', {
+        ...profileData,
+        currentPassword: profileData.currentPassword ? '[HIDDEN]' : undefined,
+        newPassword: profileData.newPassword ? '[HIDDEN]' : undefined
+      });
+
       dispatch({ type: 'LOGIN_START' });
 
       const response = await api.put('/auth/me', profileData);
+      console.log('✅ Profile update response:', response.data);
+
       const { admin } = response.data;
 
       dispatch({
@@ -134,6 +142,9 @@ export const AuthProvider = ({ children }) => {
 
       return { success: true };
     } catch (error) {
+      console.error('❌ Profile update error:', error);
+      console.error('❌ Error response:', error.response?.data);
+
       const errorMessage = error.response?.data?.message || 'Profile update failed';
       dispatch({
         type: 'LOGIN_FAILURE',

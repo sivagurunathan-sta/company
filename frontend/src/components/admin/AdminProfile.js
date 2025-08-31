@@ -55,8 +55,14 @@ const AdminProfile = () => {
       updateData.newPassword = formData.newPassword;
     }
 
+    console.log('📝 Submitting profile update:', {
+      ...updateData,
+      currentPassword: updateData.currentPassword ? '[HIDDEN]' : undefined,
+      newPassword: updateData.newPassword ? '[HIDDEN]' : undefined
+    });
+
     const result = await updateProfile(updateData);
-    
+
     if (result.success) {
       toast.success('Profile updated successfully!');
       setFormData({
@@ -66,6 +72,9 @@ const AdminProfile = () => {
         confirmPassword: ''
       });
       setIsChangingPassword(false);
+    } else {
+      console.error('❌ Profile update failed:', result.error);
+      toast.error(result.error || 'Profile update failed');
     }
   };
 
