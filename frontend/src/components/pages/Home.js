@@ -34,8 +34,20 @@ const Home = () => {
             }
           }
         );
+
+        // Check if response is ok before reading body
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
-        setNatureImages(data.map(img => img.urls.regular));
+
+        // Ensure data is an array and has valid structure
+        if (Array.isArray(data) && data.length > 0) {
+          setNatureImages(data.map(img => img.urls?.regular || img.urls?.small).filter(Boolean));
+        } else {
+          throw new Error('Invalid data structure from API');
+        }
       } catch (error) {
         console.error('Error fetching nature images:', error);
         // Fallback to default nature images
@@ -43,7 +55,7 @@ const Home = () => {
           'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?fit=crop&w=300&h=300&q=80',
           'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?fit=crop&w=300&h=300&q=80',
           'https://images.unsplash.com/photo-1518837695005-2083093ee35b?fit=crop&w=300&h=300&q=80',
-          'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?fit=crop&w=300&h=300&q=80'
+          'https://images.unsplash.com/photo-1469474968028-56623f02e42e?fit=crop&w=300&h=300&q=80'
         ]);
       }
     };
