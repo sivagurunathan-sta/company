@@ -117,6 +117,32 @@ export const AuthProvider = ({ children }) => {
     dispatch({ type: 'LOGOUT' });
   };
 
+  const updateProfile = async (profileData) => {
+    try {
+      dispatch({ type: 'LOGIN_START' });
+
+      const response = await api.put('/auth/me', profileData);
+      const { admin } = response.data;
+
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        payload: {
+          admin,
+          token: localStorage.getItem('token')
+        }
+      });
+
+      return { success: true };
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || 'Profile update failed';
+      dispatch({
+        type: 'LOGIN_FAILURE',
+        payload: errorMessage
+      });
+      return { success: false, error: errorMessage };
+    }
+  };
+
   const clearError = () => {
     dispatch({ type: 'CLEAR_ERROR' });
   };
@@ -125,6 +151,7 @@ export const AuthProvider = ({ children }) => {
     ...state,
     login,
     logout,
+    updateProfile,
     clearError
   };
 
