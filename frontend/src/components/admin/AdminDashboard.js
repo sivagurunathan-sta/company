@@ -13,6 +13,7 @@ import {
   FiTool,
   FiUser
 } from 'react-icons/fi';
+import { useLocation } from 'react-router-dom';
 import ContentEditor from './ContentEditor';
 import ProjectEditor from './ProjectEditor';
 import TeamEditor from './TeamEditor';
@@ -25,6 +26,14 @@ import AdminProfile from './AdminProfile';
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('services');
   const { admin, logout } = useAuth();
+  const location = useLocation();
+
+  // Allow deep-linking with ?tab=team etc.
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get('tab');
+    if (tab) setActiveTab(tab);
+  }, [location.search]);
 
   const sidebarItems = [
     { id: 'overview', name: 'Overview', icon: FiBarChart },
