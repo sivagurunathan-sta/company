@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Modal from '../ui/Modal';
 import { useQuery } from 'react-query';
 import { motion } from 'framer-motion';
 import { FiCheck, FiStar, FiCode, FiSmartphone, FiGlobe, FiDatabase, FiShield, FiTrendingUp } from 'react-icons/fi';
@@ -81,6 +82,9 @@ const Services = () => {
   if (error) {
     console.log('Using default services due to error:', error);
   }
+
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const ERROR_IMAGE_URL = 'https://cdn.builder.io/api/v1/image/assets%2Fc22d82f454134145a990d239b199841f%2F501a7b87fe1d4b8e9203ee19b6307667?format=webp&width=800';
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -239,7 +243,7 @@ const Services = () => {
 
                     {/* Action Button */}
                     <div className="mt-4">
-                      <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm font-medium">
+                      <button onClick={() => setShowErrorModal(true)} className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm font-medium">
                         Learn More
                       </button>
                     </div>
@@ -277,6 +281,12 @@ const Services = () => {
           </motion.div>
         </div>
       </section>
+
+      <Modal isOpen={showErrorModal} onClose={() => setShowErrorModal(false)} title="404 Error" size="lg">
+        <div className="flex flex-col items-center">
+          <img src={ERROR_IMAGE_URL} alt="404 Error" className="w-full h-auto rounded-lg" />
+        </div>
+      </Modal>
     </div>
   );
 };
