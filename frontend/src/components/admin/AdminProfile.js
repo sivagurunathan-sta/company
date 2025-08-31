@@ -73,7 +73,7 @@ const AdminProfile = () => {
       });
       setIsChangingPassword(false);
     } else {
-      console.error('❌ Profile update failed:', result.error);
+      console.error('�� Profile update failed:', result.error);
       toast.error(result.error || 'Profile update failed');
     }
   };
@@ -112,7 +112,7 @@ const AdminProfile = () => {
                     name="username"
                     value={formData.username}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Enter username"
                     required
                   />
@@ -131,7 +131,7 @@ const AdminProfile = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Enter email address"
                     required
                   />
@@ -185,7 +185,7 @@ const AdminProfile = () => {
                         name="currentPassword"
                         value={formData.currentPassword}
                         onChange={handleChange}
-                        className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full pl-10 pr-12 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Enter current password"
                         required={isChangingPassword}
                       />
@@ -211,7 +211,7 @@ const AdminProfile = () => {
                         name="newPassword"
                         value={formData.newPassword}
                         onChange={handleChange}
-                        className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full pl-10 pr-12 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Enter new password"
                         required={isChangingPassword}
                         minLength="6"
@@ -238,7 +238,7 @@ const AdminProfile = () => {
                         name="confirmPassword"
                         value={formData.confirmPassword}
                         onChange={handleChange}
-                        className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full pl-10 pr-12 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Confirm new password"
                         required={isChangingPassword}
                         minLength="6"
