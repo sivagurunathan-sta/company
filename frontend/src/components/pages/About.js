@@ -297,9 +297,14 @@ const About = () => {
             {/* Leadership cards powered by Team collection (department: 'Leadership') with fallback */}
             {(() => {
               const team = teamData?.data?.team || [];
-              const leadership = team
-                .filter(m => m.isLeader || (m.department && m.department.toLowerCase() === 'leadership') || /ceo|cto|head/i.test(m.position || ''))
-                .slice(0, 3);
+              let leadership = team.filter(m => m.isLeader);
+              if (leadership.length === 0) {
+                leadership = team
+                  .filter(m => (m.department && m.department.toLowerCase() === 'leadership') || /ceo|cto|head/i.test(m.position || ''))
+                  .slice(0, 3);
+              } else {
+                leadership = leadership.slice(0, 3);
+              }
               const cards = leadership.length > 0 ? leadership.map(m => ({
                 name: m.name,
                 role: m.position,
