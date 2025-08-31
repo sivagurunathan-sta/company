@@ -138,7 +138,8 @@ const TeamEditor = () => {
           submitData.append(`skills[${index}]`, skill);
         });
       } else {
-        submitData.append(key, formData[key]);
+        const value = typeof formData[key] === 'boolean' ? String(formData[key]) : formData[key];
+        submitData.append(key, value);
       }
     });
 
@@ -435,7 +436,7 @@ const TeamEditor = () => {
                   id="isActive"
                   checked={formData.isActive}
                   onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-blue-600 accent-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
                 <label htmlFor="isActive" className="ml-2 block text-sm text-gray-900">
                   Active Team Member
@@ -454,7 +455,7 @@ const TeamEditor = () => {
                     }
                     setFormData({ ...formData, isLeader: next });
                   }}
-                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-indigo-600 accent-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                 />
                 <label htmlFor="isLeader" className="ml-2 block text-sm text-gray-900">
                   Show on Leadership Board
