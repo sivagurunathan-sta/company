@@ -13,7 +13,6 @@ const {
 const auth = require('../middleware/auth');
 const { body, validationResult } = require('express-validator');
 
-const express = require('express');
 const router = express.Router();
 
 // Validation middleware for contact form
