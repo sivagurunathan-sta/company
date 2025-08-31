@@ -47,13 +47,28 @@ const Header = () => {
     document.body.classList.toggle('dark', shouldUseDark);
   }, []);
 
-  // Theme toggle handler
-  const toggleTheme = () => {
+  // Enhanced theme toggle handler with smooth transition
+  const toggleTheme = async () => {
+    setIsThemeChanging(true);
+
+    // Add a slight delay for smooth animation
+    await new Promise(resolve => setTimeout(resolve, 150));
+
     const newTheme = !isDarkTheme;
     setIsDarkTheme(newTheme);
     localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+
+    // Apply theme classes with transition
+    document.documentElement.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+    document.body.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+
     document.documentElement.classList.toggle('dark', newTheme);
     document.body.classList.toggle('dark', newTheme);
+
+    // Reset loading state after transition
+    setTimeout(() => {
+      setIsThemeChanging(false);
+    }, 400);
   };
 
   // Close mobile menu and search when clicking outside
