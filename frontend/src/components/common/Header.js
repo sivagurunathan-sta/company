@@ -9,6 +9,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isThemeChanging, setIsThemeChanging] = useState(false);
   const location = useLocation();
   // Keeping useCustomization for future extensibility
   useCustomization();
