@@ -61,7 +61,7 @@ const AdminLogin = () => {
             <span className="font-bold text-xl">ZEYA-TECH</span>
           </Link>
           <h1 className="text-3xl font-bold text-white mb-2">Zeya-Login</h1>
-          <p className="text-blue-200">Access your dashboard to manage content</p>
+          <p className="text-blue-200">Access Your Paid Project</p>
         </div>
 
         {/* Login Form */}
