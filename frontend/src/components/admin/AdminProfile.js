@@ -73,7 +73,7 @@ const AdminProfile = () => {
       });
       setIsChangingPassword(false);
     } else {
-      console.error('�� Profile update failed:', result.error);
+      console.error('❌ Profile update failed:', result.error);
       toast.error(result.error || 'Profile update failed');
     }
   };
@@ -281,7 +281,7 @@ const AdminProfile = () => {
 
         {/* Current Credentials Display */}
         <motion.div
-          className="bg-blue-50 rounded-lg p-6 mt-6"
+          className="bg-white rounded-lg p-6 mt-6 border border-gray-200"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
