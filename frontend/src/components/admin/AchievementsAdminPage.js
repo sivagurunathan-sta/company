@@ -573,7 +573,7 @@ const AchievementsAdminPage = () => {
                           type="text"
                           value={formData.title}
                           onChange={(e) => setFormData(prev => ({...prev, title: e.target.value}))}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                           required
                           placeholder="Enter achievement title"
                         />
@@ -587,7 +587,7 @@ const AchievementsAdminPage = () => {
                           type="date"
                           value={formData.date}
                           onChange={(e) => setFormData(prev => ({...prev, date: e.target.value}))}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                           required
                         />
                       </div>
@@ -599,7 +599,7 @@ const AchievementsAdminPage = () => {
                         <select
                           value={formData.category}
                           onChange={(e) => setFormData(prev => ({...prev, category: e.target.value}))}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         >
                           {categoryOptions.map(cat => (
                             <option key={cat.value} value={cat.value}>
@@ -618,7 +618,7 @@ const AchievementsAdminPage = () => {
                       <textarea
                         value={formData.description}
                         onChange={(e) => setFormData(prev => ({...prev, description: e.target.value}))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         rows={4}
                         required
                         placeholder="Describe your achievement..."
