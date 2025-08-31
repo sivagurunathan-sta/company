@@ -144,7 +144,7 @@ const Header = () => {
                   className="group inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
                 >
                   <FiUser className="w-4 h-4 mr-2" />
-                  Admin
+                  ZEYA
                   <div className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </Link>
               </motion.div>
@@ -247,7 +247,7 @@ const Header = () => {
                     >
                       <div className="flex items-center justify-center">
                         <FiUser className="w-4 h-4 mr-2" />
-                        Admin Login
+                        ZEYA Login
                       </div>
                     </Link>
                   </motion.div>
