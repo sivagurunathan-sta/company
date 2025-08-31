@@ -1,0 +1,267 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiMenu, FiX, FiBell, FiSearch, FiUser} from 'react-icons/fi';
+import { useCustomization } from '../../context/CustomizationContext';
+import { getAssetUrl } from '../../services/api';
+
+const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const { customization, getLogo } = useCustomization();
+
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: 'Achievements', path: '/achievements' },
+    { name: 'Upcoming Projects', path: '/projects' },
+    { name: 'Family', path: '/family' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+  ];
+
+  const isActive = (path) => location.pathname === path;
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMobileMenuOpen && !event.target.closest('.mobile-menu-container')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isMobileMenuOpen]);
+
+  return (
+    <>
+      <motion.header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled 
+            ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200' 
+            : 'bg-white shadow-lg'
+        }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Enhanced Logo with ZEYA-TECH branding */}
+            <Link to="/" className="flex items-center space-x-3 group">
+              <motion.div
+                className="relative"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {/* ZEYA-TECH Logo */}
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
+                  <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                    <span className="text-blue-600 font-bold text-lg">Z</span>
+                  </div>
+                </div>
+                
+                <div
+                  className="absolute -inset-0.5 rounded-xl opacity-0 group-hover:opacity-20 blur-sm transition-opacity duration-300 bg-gradient-to-br from-blue-600 to-purple-600"
+                ></div>
+              </motion.div>
+              <div className="hidden sm:block">
+                <span className="font-bold text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  ZEYA-TECH
+                </span>
+                <div className="text-xs text-gray-600 -mt-1">
+                  Building the Future
+                </div>
+              </div>
+            </Link>
+
+            {/* Enhanced Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-1">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 group ${
+                    isActive(item.path)
+                      ? 'text-blue-600 bg-blue-50'
+                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                  }`}
+                >
+                  <span className="relative z-10">{item.name}</span>
+                  {isActive(item.path) && (
+                    <motion.div
+                      className="absolute inset-0 bg-blue-50 rounded-lg border border-blue-200"
+                      layoutId="activeTab"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </Link>
+              ))}
+            </nav>
+
+            {/* Enhanced Right side icons */}
+            <div className="hidden lg:flex items-center space-x-3">
+              <motion.button 
+                className="p-2.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 relative group"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FiSearch className="w-5 h-5" />
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </motion.button>
+              
+              <motion.button 
+                className="p-2.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 relative group"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FiBell className="w-5 h-5" />
+                <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></div>
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </motion.button>
+
+              <div className="w-px h-6 bg-gray-300"></div>
+
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Link
+                  to="/admin/login"
+                  className="group inline-flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
+                >
+                  <FiUser className="w-4 h-4 mr-2" />
+                  Admin
+                  <div className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </Link>
+              </motion.div>
+            </div>
+
+            {/* Enhanced Mobile menu button */}
+            <motion.button
+              className="lg:hidden p-2.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 mobile-menu-container"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <AnimatePresence mode="wait">
+                {isMobileMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <FiX className="w-6 h-6" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <FiMenu className="w-6 h-6" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          </div>
+        </div>
+
+        {/* Enhanced Mobile Navigation */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 mobile-menu-container"
+            >
+              <div className="max-w-7xl mx-auto px-4 py-4">
+                <motion.div 
+                  className="space-y-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  {navItems.map((item, index) => (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      <Link
+                        to={item.path}
+                        className={`block px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${
+                          isActive(item.path)
+                            ? 'text-blue-600 bg-blue-50 border border-blue-200'
+                            : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                        }`}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  ))}
+                  
+                  <motion.div 
+                    className="pt-4 border-t border-gray-200"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <div className="flex items-center space-x-3 mb-4">
+                      <button className="flex-1 p-3 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 flex items-center justify-center">
+                        <FiSearch className="w-5 h-5 mr-2" />
+                        Search
+                      </button>
+                      <button className="flex-1 p-3 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 flex items-center justify-center relative">
+                        <FiBell className="w-5 h-5 mr-2" />
+                        Notifications
+                        <div className="absolute top-2 right-6 w-2 h-2 bg-red-500 rounded-full"></div>
+                      </button>
+                    </div>
+                    
+                    <Link
+                      to="/admin/login"
+                      className="block text-center px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <div className="flex items-center justify-center">
+                        <FiUser className="w-4 h-4 mr-2" />
+                        Admin Login
+                      </div>
+                    </Link>
+                  </motion.div>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+
+      {/* Spacer to prevent content from hiding behind fixed header */}
+      <div className="h-16"></div>
+    </>
+  );
+};
+
+export default Header;
