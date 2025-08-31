@@ -10,7 +10,8 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const location = useLocation();
-  const { } = useCustomization();
+  // Keeping useCustomization for future extensibility
+  useCustomization();
 
   const navItems = [
     { name: 'Home', path: '/' },
@@ -50,6 +51,7 @@ const Header = () => {
     setIsDarkTheme(newTheme);
     localStorage.setItem('theme', newTheme ? 'dark' : 'light');
     document.documentElement.classList.toggle('dark', newTheme);
+    document.body.classList.toggle('dark', newTheme);
   };
 
   // Close mobile menu and search when clicking outside
