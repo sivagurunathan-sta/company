@@ -34,10 +34,11 @@ const createAdminUser = async () => {
     console.log('🎉 Admin user created successfully!');
     console.log('='.repeat(40));
     console.log('Login Credentials:');
-    console.log('Username: admin');
-    console.log('Password: admin123');
+    console.log('Username: zeya');
+    console.log('Email: zeya@gmail.com');
+    console.log('Password: zeya7techworld@?');
     console.log('='.repeat(40));
-    console.log('⚠️  Please change the password after first login');
+    console.log('⚠️  Please keep credentials secure!');
 
     process.exit(0);
   } catch (error) {
