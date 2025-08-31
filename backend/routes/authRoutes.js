@@ -4,6 +4,10 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
+// Log route registration
+console.log('🔗 Registering auth routes...');
+console.log('📝 Available controllers:', { register: !!register, login: !!login, getMe: !!getMe, updateMe: !!updateMe, debugAdmins: !!debugAdmins });
+
 // Debug routes (remove in production)
 router.get('/debug/admins', debugAdmins);
 
