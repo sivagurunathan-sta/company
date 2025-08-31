@@ -63,7 +63,7 @@ const Contact = () => {
     const errors = [];
     if (!formData.name || formData.name.trim().length < 2) errors.push('Name must be at least 2 characters.');
     if (!formData.email) errors.push('Valid email is required.');
-    if (!formData.subject || formData.subject.trim().length < 5) errors.push('Subject must be at least 5 characters.');
+    if (formData.subject && formData.subject.trim().length > 200) errors.push('Subject cannot exceed 200 characters.');
     if (!formData.message || formData.message.trim().length < 10) errors.push('Message must be at least 10 characters.');
     if (formData.phone) {
       const cleaned = String(formData.phone).replace(/[^\d+]/g, '');
@@ -350,7 +350,7 @@ const Contact = () => {
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      minLength={5}
+                      maxLength={200}
                       className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
                       placeholder="Brief subject of your message"
                       required
