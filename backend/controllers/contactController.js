@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 // Email configuration (optional)
 const createEmailTransporter = () => {
   if (process.env.EMAIL_HOST && process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-    return nodemailer.createTransporter({
+    return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: process.env.EMAIL_PORT || 587,
       secure: false,
@@ -312,19 +312,17 @@ const getContactStats = async (req, res) => {
 const markAsRead = async (req, res) => {
   try {
     const { id } = req.params;
-    
-    const contact = await Contact.findByIdAndUpdate(
-      id,
-      { 
-        status: contact.status === 'new' ? 'in-progress' : contact.status,
-        readAt: new Date()
-      },
-      { new: true }
-    );
 
+    const contact = await Contact.findById(id);
     if (!contact) {
       return res.status(404).json({ message: 'Contact not found' });
     }
+
+    if (contact.status === 'new') {
+      contact.status = 'in-progress';
+    }
+    contact.readAt = new Date();
+    await contact.save();
 
     res.json({ success: true, contact });
   } catch (error) {
