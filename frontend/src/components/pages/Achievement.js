@@ -325,7 +325,7 @@ const AchievementCard = ({ achievement, index, getCategoryIcon, getCategoryColor
           </div>
         ) : (
           <div className="mt-4">
-            <button onClick={() => setShowErrorModal(true)} className="w-full bg-gray-100 text-gray-600 py-2 px-4 rounded-lg text-sm font-medium">
+            <button onClick={() => setShowErrorModal(true)} className="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white py-2 px-4 rounded-lg text-sm font-medium shadow-md hover:shadow-lg hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 transition-all duration-300">
               View Details
             </button>
             <Modal isOpen={showErrorModal} onClose={() => setShowErrorModal(false)} title="404 Error" size="lg">
