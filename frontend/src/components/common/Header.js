@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX, FiBell, FiSearch, FiUser} from 'react-icons/fi';
+import { FiMenu, FiX, FiSearch, FiUser, FiSun, FiMoon, FiChevronDown} from 'react-icons/fi';
 import { useCustomization } from '../../context/CustomizationContext';
 import { getAssetUrl } from '../../services/api';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const location = useLocation();
   const { customization, getLogo } = useCustomization();
 
@@ -33,17 +35,38 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when clicking outside
+  // Initialize theme from localStorage
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+
+    setIsDarkTheme(shouldUseDark);
+    document.documentElement.classList.toggle('dark', shouldUseDark);
+  }, []);
+
+  // Theme toggle handler
+  const toggleTheme = () => {
+    const newTheme = !isDarkTheme;
+    setIsDarkTheme(newTheme);
+    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+    document.documentElement.classList.toggle('dark', newTheme);
+  };
+
+  // Close mobile menu and search when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isMobileMenuOpen && !event.target.closest('.mobile-menu-container')) {
         setIsMobileMenuOpen(false);
       }
+      if (isSearchOpen && !event.target.closest('.search-container')) {
+        setIsSearchOpen(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isMobileMenuOpen]);
+  }, [isMobileMenuOpen, isSearchOpen]);
 
   return (
     <>
@@ -114,22 +137,86 @@ const Header = () => {
 
             {/* Enhanced Right side icons */}
             <div className="hidden lg:flex items-center space-x-3">
-              <motion.button 
+              {/* Search with Dropdown */}
+              <div className="relative search-container">
+                <motion.button
+                  className="p-2.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 relative group flex items-center"
+                  onClick={() => setIsSearchOpen(!isSearchOpen)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FiSearch className="w-5 h-5" />
+                  <FiChevronDown className={`w-3 h-3 ml-1 transition-transform duration-200 ${isSearchOpen ? 'rotate-180' : ''}`} />
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </motion.button>
+
+                {/* Search Dropdown */}
+                <AnimatePresence>
+                  {isSearchOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50"
+                    >
+                      <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-100">
+                        Navigate to:
+                      </div>
+                      {navItems.map((item, index) => (
+                        <motion.div
+                          key={item.name}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.05 }}
+                        >
+                          <Link
+                            to={item.path}
+                            className={`block px-4 py-2.5 text-sm hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 ${
+                              isActive(item.path) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'
+                            }`}
+                            onClick={() => setIsSearchOpen(false)}
+                          >
+                            {item.name}
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Theme Toggle Button */}
+              <motion.button
                 className="p-2.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 relative group"
+                onClick={toggleTheme}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                title={isDarkTheme ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
               >
-                <FiSearch className="w-5 h-5" />
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </motion.button>
-              
-              <motion.button 
-                className="p-2.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 relative group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FiBell className="w-5 h-5" />
-                <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></div>
+                <AnimatePresence mode="wait">
+                  {isDarkTheme ? (
+                    <motion.div
+                      key="sun"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <FiSun className="w-5 h-5" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="moon"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <FiMoon className="w-5 h-5" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </motion.button>
 
@@ -229,14 +316,22 @@ const Header = () => {
                     transition={{ delay: 0.3 }}
                   >
                     <div className="flex items-center space-x-3 mb-4">
-                      <button className="flex-1 p-3 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 flex items-center justify-center">
+                      <button
+                        className="flex-1 p-3 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 flex items-center justify-center"
+                        onClick={() => {
+                          setIsSearchOpen(!isSearchOpen);
+                          setIsMobileMenuOpen(false);
+                        }}
+                      >
                         <FiSearch className="w-5 h-5 mr-2" />
-                        Search
+                        Quick Navigation
                       </button>
-                      <button className="flex-1 p-3 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 flex items-center justify-center relative">
-                        <FiBell className="w-5 h-5 mr-2" />
-                        Notifications
-                        <div className="absolute top-2 right-6 w-2 h-2 bg-red-500 rounded-full"></div>
+                      <button
+                        className="flex-1 p-3 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 flex items-center justify-center"
+                        onClick={toggleTheme}
+                      >
+                        {isDarkTheme ? <FiSun className="w-5 h-5 mr-2" /> : <FiMoon className="w-5 h-5 mr-2" />}
+                        {isDarkTheme ? 'Light' : 'Dark'} Theme
                       </button>
                     </div>
                     
