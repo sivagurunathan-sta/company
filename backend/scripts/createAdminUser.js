@@ -17,14 +17,14 @@ const createAdminUser = async () => {
     console.log('✅ Connected to MongoDB');
 
     // Remove existing admin and create fresh one
-    await Admin.deleteMany({ email: 'admin@example.com' });
+    await Admin.deleteMany({ email: 'zeya@gmail.com' });
     console.log('🗑️  Removed existing admin users');
 
     // Create admin user (password will be hashed by pre-save middleware)
     const admin = new Admin({
-      username: 'admin',
-      email: 'admin@example.com',
-      password: 'admin123', // This will be hashed by the model's pre-save middleware
+      username: 'zeya',
+      email: 'zeya@gmail.com',
+      password: 'zeya7techworld@?', // This will be hashed by the model's pre-save middleware
       role: 'admin',
       isActive: true
     });

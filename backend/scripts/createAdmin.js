@@ -48,9 +48,9 @@ const createAdmin = async () => {
     console.log('📝 Creating new admin user...');
     
     const adminData = {
-      username: 'admin',
-      email: 'admin@example.com',
-      password: 'admin123',
+      username: 'zeya',
+      email: 'zeya@gmail.com',
+      password: 'zeya7techworld@?',
       role: 'admin'
     };
 
