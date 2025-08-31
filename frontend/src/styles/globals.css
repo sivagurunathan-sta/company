@@ -397,17 +397,71 @@ select:focus-visible {
 }
 
 /* Dark mode utilities */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  border-color: #1f2937;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #2563eb, #7c3aed);
+}
+
+.dark .glass-card {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+.dark .text-gradient-blue {
+  background: linear-gradient(135deg, #93c5fd 0%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .shadow-glow-blue {
+  box-shadow: 0 0 30px rgba(96, 165, 250, 0.4);
+}
+
+.dark .shadow-glow-purple {
+  box-shadow: 0 0 30px rgba(196, 181, 253, 0.4);
+}
+
+/* Media query fallback for browsers that don't support class-based dark mode */
 @media (prefers-color-scheme: dark) {
-  ::-webkit-scrollbar-track {
+  html:not(.light) {
+    color-scheme: dark;
+  }
+
+  html:not(.light) body {
+    background-color: #0f172a;
+    color: #f1f5f9;
+  }
+
+  html:not(.light) ::-webkit-scrollbar-track {
     background: #1f2937;
   }
-  
-  ::-webkit-scrollbar-thumb {
+
+  html:not(.light) ::-webkit-scrollbar-thumb {
     background: linear-gradient(45deg, #3b82f6, #8b5cf6);
     border-color: #1f2937;
   }
-  
-  ::-webkit-scrollbar-thumb:hover {
+
+  html:not(.light) ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(45deg, #2563eb, #7c3aed);
   }
 }
