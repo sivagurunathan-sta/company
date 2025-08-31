@@ -69,6 +69,19 @@ const TeamEditor = () => {
     }
   });
 
+  const toggleLeaderMutation = useMutation(
+    ({ id, isLeader }) => teamAPI.update(id, { isLeader }),
+    {
+      onSuccess: () => {
+        toast.success('Leadership status updated');
+        queryClient.invalidateQueries('teamMembers');
+      },
+      onError: (error) => {
+        toast.error(error.response?.data?.message || 'Failed to update leadership status');
+      }
+    }
+  );
+
   const resetForm = () => {
     setFormData({
       name: '',
@@ -451,7 +464,7 @@ const TeamEditor = () => {
               {teamMembers?.data?.team?.map((member) => (
                 <motion.div
                   key={member._id}
-                  className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                  className="border border-gray-200 bg-white rounded-lg p-4 hover:shadow-md transition-shadow"
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -555,8 +568,22 @@ const TeamEditor = () => {
                     )}
                   </div>
 
+                  {/* Leadership Badge */}
+                  {member.isLeader && (
+                    <div className="mb-3 text-center">
+                      <span className="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-700">Leadership</span>
+                    </div>
+                  )}
+
                   {/* Action Buttons */}
                   <div className="flex justify-center space-x-2">
+                    <button
+                      onClick={() => toggleLeaderMutation.mutate({ id: member._id, isLeader: !member.isLeader })}
+                      className={`px-3 py-2 rounded-md text-sm font-medium ${member.isLeader ? 'text-indigo-700 hover:bg-indigo-50' : 'text-gray-700 hover:bg-gray-50'}`}
+                      title={member.isLeader ? 'Remove from Leadership' : 'Add to Leadership'}
+                    >
+                      {member.isLeader ? 'Remove Leadership' : 'Add to Leadership'}
+                    </button>
                     <button
                       onClick={() => handleEdit(member)}
                       className="p-2 text-blue-600 hover:bg-blue-50 rounded-md"
@@ -572,7 +599,7 @@ const TeamEditor = () => {
                   </div>
 
                   {/* Status Badge */}
-                  <div className="mt-2 text-center">
+                  <div className="mt-2 text-center space-x-2">
                     <span className={`px-2 py-1 text-xs rounded-full ${
                       member.isActive
                         ? 'bg-green-100 text-green-800'
@@ -580,6 +607,9 @@ const TeamEditor = () => {
                     }`}>
                       {member.isActive ? 'Active' : 'Inactive'}
                     </span>
+                    {member.isLeader && (
+                      <span className="px-2 py-1 text-xs rounded-full bg-indigo-100 text-indigo-700">Leadership</span>
+                    )}
                   </div>
                 </motion.div>
               ))}
