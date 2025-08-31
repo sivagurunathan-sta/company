@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
@@ -265,7 +264,7 @@ const MessagesPlaceholder = () => {
             <li>• View and respond to contact form submissions</li>
             <li>• Mark messages as read/unread</li>
             <li>• Filter messages by date and status</li>
-            <li>��� Export message data</li>
+            <li>• Export message data</li>
           </ul>
         </div>
       </div>
