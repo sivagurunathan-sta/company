@@ -298,7 +298,7 @@ const About = () => {
             {(() => {
               const team = teamData?.data?.team || [];
               const leadership = team
-                .filter(m => (m.department && m.department.toLowerCase() === 'leadership') || /ceo|cto|head/i.test(m.position || ''))
+                .filter(m => m.isLeader || (m.department && m.department.toLowerCase() === 'leadership') || /ceo|cto|head/i.test(m.position || ''))
                 .slice(0, 3);
               const cards = leadership.length > 0 ? leadership.map(m => ({
                 name: m.name,
