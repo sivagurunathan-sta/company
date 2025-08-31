@@ -392,7 +392,7 @@ const ProjectCard = ({ project, index, viewMode, getStatusColor, getStatusIcon }
         {viewMode === 'grid' && (
           <>
             <div className="mt-4">
-              <button onClick={() => setShowErrorModal(true)} className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm font-medium">
+              <button onClick={() => setShowErrorModal(true)} className="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white py-2 px-4 rounded-lg text-sm font-medium shadow-md hover:shadow-lg hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 transition-all duration-300">
                 View Details
               </button>
             </div>
