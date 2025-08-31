@@ -10,7 +10,7 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const location = useLocation();
-  const { customization, getLogo } = useCustomization();
+  const { } = useCustomization();
 
   const navItems = [
     { name: 'Home', path: '/' },
