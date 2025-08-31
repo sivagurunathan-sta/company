@@ -33,15 +33,21 @@ const validateContactForm = [
   body('phone')
     .optional()
     .trim()
-    .matches(/^[\+]?[1-9][\d]{0,15}$/)
-    .withMessage('Please provide a valid phone number'),
+    .custom((value) => {
+      if (!value) return true;
+      const cleaned = String(value).replace(/[^\d+]/g, '');
+      if (!/^\+?\d{7,15}$/.test(cleaned)) {
+        throw new Error('Please provide a valid phone number');
+      }
+      return true;
+    }),
   
   body('subject')
     .trim()
     .notEmpty()
     .withMessage('Subject is required')
-    .isLength({ min: 5, max: 200 })
-    .withMessage('Subject must be between 5 and 200 characters'),
+    .isLength({ max: 200 })
+    .withMessage('Subject cannot exceed 200 characters'),
   
   body('message')
     .trim()

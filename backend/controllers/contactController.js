@@ -51,10 +51,12 @@ const submitContactForm = async (req, res) => {
     }
 
     // Create contact entry
+    const sanitizedPhone = phone ? String(phone).replace(/[^\d+]/g, '') : '';
+
     const contact = await Contact.create({
       name: name.trim(),
       email: email.toLowerCase().trim(),
-      phone: phone ? phone.trim() : '',
+      phone: sanitizedPhone,
       subject: subject.trim(),
       message: message.trim(),
       queryType,

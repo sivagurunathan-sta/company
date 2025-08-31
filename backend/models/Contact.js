@@ -20,12 +20,12 @@ const contactSchema = new mongoose.Schema({
   },
   queryType: {
     type: String,
-    enum: ['general', 'project', 'career', 'partnership'],
+    enum: ['general', 'project', 'support', 'career', 'partnership'],
     default: 'general'
   },
   urgency: {
     type: String,
-    enum: ['low', 'medium', 'high'],
+    enum: ['low', 'medium', 'high', 'critical'],
     default: 'medium'
   },
   status: {
