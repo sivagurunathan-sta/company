@@ -29,6 +29,25 @@ const authReducer = (state, action) => {
         token: null,
         error: action.payload
       };
+    case 'UPDATE_START':
+      return {
+        ...state,
+        loading: true,
+        error: null
+      };
+    case 'UPDATE_SUCCESS':
+      return {
+        ...state,
+        loading: false,
+        admin: action.payload.admin,
+        error: null
+      };
+    case 'UPDATE_FAILURE':
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
     case 'LOGOUT':
       return {
         ...state,
@@ -125,7 +144,7 @@ export const AuthProvider = ({ children }) => {
         newPassword: profileData.newPassword ? '[HIDDEN]' : undefined
       });
 
-      dispatch({ type: 'LOGIN_START' });
+      dispatch({ type: 'UPDATE_START' });
 
       const response = await api.put('/auth/me', profileData);
       console.log('✅ Profile update response:', response.data);
@@ -133,11 +152,8 @@ export const AuthProvider = ({ children }) => {
       const { admin } = response.data;
 
       dispatch({
-        type: 'LOGIN_SUCCESS',
-        payload: {
-          admin,
-          token: localStorage.getItem('token')
-        }
+        type: 'UPDATE_SUCCESS',
+        payload: { admin }
       });
 
       return { success: true };
@@ -147,7 +163,7 @@ export const AuthProvider = ({ children }) => {
 
       const errorMessage = error.response?.data?.message || 'Profile update failed';
       dispatch({
-        type: 'LOGIN_FAILURE',
+        type: 'UPDATE_FAILURE',
         payload: errorMessage
       });
       return { success: false, error: errorMessage };
