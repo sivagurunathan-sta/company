@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { motion } from 'framer-motion';
-import { FiArrowRight, FiCheck, FiStar, FiCode, FiSmartphone, FiGlobe, FiDatabase, FiShield, FiTrendingUp, FiRefreshCw } from 'react-icons/fi';
+import { FiCheck, FiStar, FiCode, FiSmartphone, FiGlobe, FiDatabase, FiShield, FiTrendingUp } from 'react-icons/fi';
 import { servicesAPI, getAssetUrl } from '../../services/api';
 import LoadingSpinner from '../common/LoadingSpinner';
 
@@ -18,7 +18,7 @@ const Services = () => {
   const [filter, setFilter] = useState('all');
 
   // Use React Query for services data
-  const { data: servicesData, isLoading, error, refetch } = useQuery(
+  const { data: servicesData, isLoading, error } = useQuery(
     ['services'],
     () => servicesAPI.getAll({ active: true }),
     {
