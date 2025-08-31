@@ -35,6 +35,19 @@ const AdminDashboard = () => {
     if (tab) setActiveTab(tab);
   }, [location.search]);
 
+  // Force light theme on admin pages
+  useEffect(() => {
+    const hadDark = document.documentElement.classList.contains('dark');
+    document.documentElement.classList.remove('dark');
+    document.body.classList.remove('dark');
+    return () => {
+      if (hadDark) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+      }
+    };
+  }, []);
+
   const sidebarItems = [
     { id: 'overview', name: 'Overview', icon: FiBarChart },
     { id: 'content', name: 'Content', icon: FiEdit3 },
