@@ -37,7 +37,7 @@ const createAdmin = async () => {
       });
 
       console.log('💡 You can login with any of the above credentials.');
-      console.log('💡 Default password is usually: admin123');
+      console.log('💡 Default password is usually: zeya7techworld@?');
       console.log('');
       console.log('🔄 If you want to create a new admin or reset password, delete existing admins first.');
       
