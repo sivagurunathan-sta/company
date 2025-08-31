@@ -325,6 +325,7 @@ const createTeamMember = async (req, res) => {
       phone: req.body.phone?.trim() || '',
       bio: req.body.bio?.trim() || '',
       isActive: req.body.isActive !== undefined ? req.body.isActive === 'true' || req.body.isActive === true : true,
+      isLeader: req.body.isLeader !== undefined ? req.body.isLeader === 'true' || req.body.isLeader === true : false,
       joinDate: req.body.joinDate ? new Date(req.body.joinDate) : new Date()
     };
 
@@ -445,6 +446,9 @@ const updateTeamMember = async (req, res) => {
     if (req.body.joinDate !== undefined) updateData.joinDate = new Date(req.body.joinDate);
     if (req.body.isActive !== undefined) {
       updateData.isActive = req.body.isActive === 'true' || req.body.isActive === true;
+    }
+    if (req.body.isLeader !== undefined) {
+      updateData.isLeader = req.body.isLeader === 'true' || req.body.isLeader === true;
     }
 
     // Handle image upload
