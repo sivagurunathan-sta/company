@@ -17,6 +17,8 @@ const iconMap = {
 
 const Services = () => {
   const [filter, setFilter] = useState('all');
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const ERROR_IMAGE_URL = 'https://cdn.builder.io/api/v1/image/assets%2Fc22d82f454134145a990d239b199841f%2F501a7b87fe1d4b8e9203ee19b6307667?format=webp&width=800';
 
   // Use React Query for services data
   const { data: servicesData, isLoading, error } = useQuery(
