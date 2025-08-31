@@ -44,7 +44,10 @@ const Contact = () => {
       });
     },
     onError: (error) => {
-      toast.error(error.response?.data?.message || 'Failed to send message. Please try again.');
+      const messages = Array.isArray(error.response?.data?.errors)
+        ? error.response.data.errors.map(e => e.msg).join('\n')
+        : (error.response?.data?.message || 'Failed to send message. Please try again.');
+      toast.error(messages);
     }
   });
 
@@ -57,7 +60,21 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    submitMutation.mutate(formData);
+    const errors = [];
+    if (!formData.name || formData.name.trim().length < 2) errors.push('Name must be at least 2 characters.');
+    if (!formData.email) errors.push('Valid email is required.');
+    if (!formData.subject || formData.subject.trim().length < 5) errors.push('Subject must be at least 5 characters.');
+    if (!formData.message || formData.message.trim().length < 10) errors.push('Message must be at least 10 characters.');
+    if (formData.phone) {
+      const cleaned = String(formData.phone).replace(/[^\d+]/g, '');
+      if (!/^\+?\d{7,15}$/.test(cleaned)) errors.push('Please enter a valid phone number.');
+    }
+    if (errors.length) {
+      errors.forEach(msg => toast.error(msg));
+      return;
+    }
+    const payload = { ...formData, phone: formData.phone ? String(formData.phone).replace(/[^\d+]/g, '') : '' };
+    submitMutation.mutate(payload);
   };
 
   const fadeInUp = {
@@ -236,6 +253,7 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
+                      minLength={2}
                       className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
                       placeholder="Your full name"
                       required
@@ -272,8 +290,9 @@ const Contact = () => {
                       <input
                         type="tel"
                         name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
+                      value={formData.phone}
+                      onChange={handleChange}
+                      pattern="[+0-9\-\s()]{7,}"
                         className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
                         placeholder="+91 9876543210"
                       />
@@ -331,6 +350,7 @@ const Contact = () => {
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
+                      minLength={5}
                       className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
                       placeholder="Brief subject of your message"
                       required
@@ -349,6 +369,7 @@ const Contact = () => {
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
+                      minLength={10}
                       rows="6"
                       className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all duration-300 bg-gray-50 dark:bg-gray-900 hover:bg-white dark:hover:bg-gray-900"
                       placeholder="Tell us about your project or inquiry..."
