@@ -25,7 +25,8 @@ const TeamEditor = () => {
       github: ''
     },
     joinDate: '',
-    isActive: true
+    isActive: true,
+    isLeader: false
   });
 
   const queryClient = useQueryClient();
@@ -33,6 +34,11 @@ const TeamEditor = () => {
   const { data: teamMembers, isLoading } = useQuery('teamMembers', () =>
     teamAPI.getAll()
   );
+
+  const leadershipCount = () => {
+    const list = teamMembers?.data?.team || [];
+    return list.filter(m => m.isLeader).length;
+  };
 
   const createMutation = useMutation(teamAPI.create, {
     onSuccess: () => {
@@ -97,7 +103,8 @@ const TeamEditor = () => {
         github: ''
       },
       joinDate: '',
-      isActive: true
+      isActive: true,
+      isLeader: false
     });
     setEditingId(null);
     setShowForm(false);
@@ -162,7 +169,8 @@ const TeamEditor = () => {
         github: member.socialLinks?.github || ''
       },
       joinDate: member.joinDate ? member.joinDate.split('T')[0] : '',
-      isActive: member.isActive
+      isActive: member.isActive,
+      isLeader: Boolean(member.isLeader)
     });
     setEditingId(member._id);
     setShowForm(true);
@@ -419,18 +427,39 @@ const TeamEditor = () => {
               )}
             </div>
 
-            {/* Active Status */}
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="isActive"
-                checked={formData.isActive}
-                onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <label htmlFor="isActive" className="ml-2 block text-sm text-gray-900">
-                Active Team Member
-              </label>
+            {/* Active + Leadership Status */}
+            <div className="flex items-center gap-6">
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="isActive"
+                  checked={formData.isActive}
+                  onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
+                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                />
+                <label htmlFor="isActive" className="ml-2 block text-sm text-gray-900">
+                  Active Team Member
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="isLeader"
+                  checked={formData.isLeader}
+                  onChange={(e) => {
+                    const next = e.target.checked;
+                    if (next && !formData.isLeader && leadershipCount() >= 3) {
+                      toast.error('Only 3 members can be on the leadership board');
+                      return;
+                    }
+                    setFormData({ ...formData, isLeader: next });
+                  }}
+                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                />
+                <label htmlFor="isLeader" className="ml-2 block text-sm text-gray-900">
+                  Show on Leadership Board
+                </label>
+              </div>
             </div>
 
             <div className="flex justify-end space-x-3">
@@ -578,7 +607,13 @@ const TeamEditor = () => {
                   {/* Action Buttons */}
                   <div className="flex justify-center space-x-2">
                     <button
-                      onClick={() => toggleLeaderMutation.mutate({ id: member._id, isLeader: !member.isLeader })}
+                      onClick={() => {
+                        if (!member.isLeader && leadershipCount() >= 3) {
+                          toast.error('Only 3 members can be on the leadership board');
+                          return;
+                        }
+                        toggleLeaderMutation.mutate({ id: member._id, isLeader: !member.isLeader });
+                      }}
                       className={`px-3 py-2 rounded-md text-sm font-medium ${member.isLeader ? 'text-indigo-700 hover:bg-indigo-50' : 'text-gray-700 hover:bg-gray-50'}`}
                       title={member.isLeader ? 'Remove from Leadership' : 'Add to Leadership'}
                     >
