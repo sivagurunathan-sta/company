@@ -14,8 +14,6 @@ import {
   FiHeart,
   FiShield
 } from 'react-icons/fi';
-import { useQuery } from 'react-query';
-import { contentAPI, achievementAPI, projectAPI } from '../../services/api';
 import { useCustomization } from '../../context/CustomizationContext';
 
 const Home = () => {
