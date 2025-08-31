@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX, FiSearch, FiUser, FiSun, FiMoon, FiChevronDown} from 'react-icons/fi';
 import { useCustomization } from '../../context/CustomizationContext';
-import { getAssetUrl } from '../../services/api';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
