@@ -17,6 +17,7 @@ import {
 import { useQuery } from 'react-query';
 import { contentAPI, achievementAPI, projectAPI } from '../../services/api';
 import { useCustomization } from '../../context/CustomizationContext';
+import unsplashService from '../../services/unsplashService';
 
 const Home = () => {
   const { getColor } = useCustomization();
