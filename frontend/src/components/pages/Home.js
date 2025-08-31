@@ -22,35 +22,15 @@ const Home = () => {
   const { getColor } = useCustomization();
   const [natureImages, setNatureImages] = useState([]);
 
-  // Fetch nature images from Unsplash API
+  // Fetch nature images using unsplashService
   useEffect(() => {
     const fetchNatureImages = async () => {
       try {
-        const response = await fetch(
-          'https://api.unsplash.com/photos/random?query=nature,landscape,forest,mountains&count=4&orientation=landscape',
-          {
-            headers: {
-              'Authorization': 'Client-ID YOUR_UNSPLASH_ACCESS_KEY'
-            }
-          }
-        );
-
-        // Check if response is ok before reading body
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        // Ensure data is an array and has valid structure
-        if (Array.isArray(data) && data.length > 0) {
-          setNatureImages(data.map(img => img.urls?.regular || img.urls?.small).filter(Boolean));
-        } else {
-          throw new Error('Invalid data structure from API');
-        }
+        const images = await unsplashService.fetchNatureImages(4);
+        setNatureImages(images.map(img => img.url));
       } catch (error) {
         console.error('Error fetching nature images:', error);
-        // Fallback to default nature images
+        // Service already provides fallback images, but add extra safety
         setNatureImages([
           'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?fit=crop&w=300&h=300&q=80',
           'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?fit=crop&w=300&h=300&q=80',
