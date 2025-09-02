@@ -13,6 +13,9 @@ const apiRoutes = require('./routes');
 
 const app = express();
 
+// Optional override to relax all restrictions (use for debugging or specific hosting constraints)
+const ALLOW_ALL = process.env.ALLOW_ALL === 'true';
+
 // Trust proxy for accurate IP addresses (if behind reverse proxy)
 app.set('trust proxy', 1);
 
@@ -20,33 +23,51 @@ app.set('trust proxy', 1);
 app.use(requestLogger);
 
 // Security middleware
-app.use(securityMiddleware);
+if (ALLOW_ALL) {
+  console.log('Security middleware disabled via ALLOW_ALL');
+} else {
+  app.use(securityMiddleware);
+}
 
-// CORS Configuration - Fixed to work with frontend
-app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:3001',
-    'http://localhost:5001',
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:3001',
-    'http://127.0.0.1:5001',
-    process.env.FRONTEND_URL
-  ].filter(Boolean),
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-}));
+// CORS Configuration
+if (ALLOW_ALL) {
+  app.use(cors({
+    origin: true, // reflect request origin
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  }));
+  console.log('CORS: allowing all origins via ALLOW_ALL');
+} else {
+  app.use(cors({
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'http://localhost:5001',
+      'http://127.0.0.1:3000',
+      'http://127.0.0.1:3001',
+      'http://127.0.0.1:5001',
+      process.env.FRONTEND_URL
+    ].filter(Boolean),
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  }));
+}
 
 // Rate limiting (method-based) with health whitelisting
-const skipRateLimitPaths = new Set(['/health', '/api/health']);
-app.use((req, res, next) => {
-  if (skipRateLimitPaths.has(req.path)) return next();
-  if (req.method === 'GET' || req.method === 'HEAD' || req.method === 'OPTIONS') {
-    return readOnlyLimiter(req, res, next);
-  }
-  return generalLimiter(req, res, next);
-});
+if (!ALLOW_ALL) {
+  const skipRateLimitPaths = new Set(['/health', '/api/health']);
+  app.use((req, res, next) => {
+    if (skipRateLimitPaths.has(req.path)) return next();
+    if (req.method === 'GET' || req.method === 'HEAD' || req.method === 'OPTIONS') {
+      return readOnlyLimiter(req, res, next);
+    }
+    return generalLimiter(req, res, next);
+  });
+} else {
+  console.log('Rate limiting disabled via ALLOW_ALL');
+}
 
 // Body parser middleware
 app.use(express.json({ limit: '10mb' }));
