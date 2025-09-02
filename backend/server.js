@@ -47,6 +47,10 @@ if (ALLOW_ALL) {
       'http://127.0.0.1:3000',
       'http://127.0.0.1:3001',
       'http://127.0.0.1:5001',
+      'https://zeyasolutions.com',
+      'http://zeyasolutions.com',
+      'https://www.zeyasolutions.com',
+      'http://www.zeyasolutions.com',
       process.env.FRONTEND_URL
     ].filter(Boolean),
     credentials: true,
